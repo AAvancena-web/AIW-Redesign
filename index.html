@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Auckland Integrity Waterproofing | Waterproofing That Works</title>
+<meta name="description" content="Auckland Integrity Waterproofing installs certified waterproofing membranes, tanking and torch-on systems for residential and commercial builds across Auckland. Free site assessment and quote.">
+<link rel="icon" href="https://aiw.co.nz/wp-content/uploads/2019/04/AIW-Logo-16px.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ============================================================
+   AUCKLAND INTEGRITY WATERPROOFING
+   Homepage redesign, standalone prototype
+   Palette derived from the AIW diamond logo:
+   cyan #1BA9E2, yellow #F5E31A, white, deep navy support tone
+   ============================================================ */
+
+:root{
+  /* Brand */
+  --blue:        #1BA9E2;
+  --blue-600:    #1191C6;
+  --blue-700:    #0B78A6;
+  --blue-050:    #EAF7FD;
+  --blue-100:    #D2EEFA;
+  --yellow:      #F5E31A;
+  --yellow-600:  #DCCB09;
+
+  /* Neutrals */
+  --navy:        #062A3E;
+  --navy-800:    #0A3B55;
+  --ink:         #0C1B24;
+  --ink-700:     #33505F;
+  --ink-500:     #5E7683;
+  --line:        #E1E9EE;
+  --surface:     #F4F8FA;
+  --white:       #FFFFFF;
+
+  /* Layout */
+  --wrap:        1440px;
+  --wrap-xl:     1880px;
+  --gutter:      24px;
+  --radius:      18px;
+  --radius-sm:   12px;
+  --radius-lg:   28px;
+
+  /* Effects */
+  --shadow-sm:   0 2px 10px rgba(6,42,62,.06);
+  --shadow:      0 18px 40px -18px rgba(6,42,62,.28);
+  --shadow-lg:   0 40px 80px -30px rgba(6,42,62,.42);
+  --ease:        cubic-bezier(.22,.8,.3,1);
+
+  --header-h:    94px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+
+body{
+  margin:0;
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:17px;
+  line-height:1.72;
+  color:var(--ink-700);
+  background:var(--white);
+  overflow-x:hidden;
+}
+
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+ul{margin:0;padding:0;list-style:none}
+
+h1,h2,h3,h4{
+  font-family:'Barlow Condensed','Manrope',sans-serif;
+  font-weight:700;
+  color:var(--navy);
+  line-height:1.06;
+  letter-spacing:.005em;
+  margin:0 0 18px;
+  text-transform:uppercase;
+}
+h1{font-size:clamp(2.75rem,5.2vw,4.5rem)}
+h2{font-size:clamp(2.1rem,3.7vw,3.35rem)}
+h3{font-size:clamp(1.35rem,1.7vw,1.6rem)}
+p{margin:0 0 18px}
+p:last-child{margin-bottom:0}
+
+::selection{background:var(--yellow);color:var(--navy)}
+
+/* ---------- Layout shell ---------- */
+.wrap{
+  width:100%;
+  max-width:var(--wrap);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+@media (min-width:1700px){
+  .wrap{max-width:var(--wrap-xl)}
+  :root{--gutter:48px}
+}
+
+.section{padding:clamp(72px,8vw,128px) 0;position:relative}
+.section--tight{padding:clamp(56px,5vw,84px) 0}
+.section--surface{background:var(--surface)}
+.section--navy{background:var(--navy);color:rgba(255,255,255,.78)}
+.section--navy h2,.section--navy h3{color:#fff}
+
+/* Grid and flex items must be allowed to shrink below their min-content width,
+   otherwise a long word or a padded button widens the track past the container */
+.hero__grid > *,
+.split > *,
+.contact__grid > *,
+.footer__grid > *,
+.services__grid > *,
+.values__grid > *,
+.process__grid > *,
+.stats__grid > *,
+.work__grid > *,
+.field-row > *,
+.cta-band__inner > *,
+.header__inner > *,
+.trustbar__inner > *{min-width:0}
+
+/* ---------- Shared type blocks ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Manrope',sans-serif;
+  font-size:.75rem;font-weight:800;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--blue-700);
+  margin:0 0 18px;
+}
+.eyebrow::before{
+  content:"";width:26px;height:3px;border-radius:2px;
+  background:var(--yellow);flex:none;
+}
+.eyebrow--light{color:var(--yellow)}
+.eyebrow--center{justify-content:center}
+
+.section-head{margin-bottom:clamp(40px,4vw,64px)}
+.section-head--center{text-align:center}
+.section-head--center .eyebrow{justify-content:center}
+.section-head p{font-size:1.06rem}
+
+.lead{font-size:1.125rem;color:var(--ink-700)}
+.section--navy .lead{color:rgba(255,255,255,.76)}
+
+.rule{
+  width:92px;height:4px;border-radius:3px;
+  background:linear-gradient(90deg,var(--yellow),var(--blue));
+  margin:0 0 26px;
+}
+.rule--center{margin-inline:auto}
+
+/* ---------- Buttons (solid fills only, no transparency) ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  font-family:'Manrope',sans-serif;
+  font-size:.86rem;font-weight:800;
+  letter-spacing:.11em;text-transform:uppercase;
+  padding:19px 34px;
+  border-radius:10px;
+  line-height:1;
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background-color .3s var(--ease), color .3s var(--ease);
+}
+.btn i{font-size:1em;transition:transform .35s var(--ease)}
+.btn::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  transform:translateY(101%);
+  transition:transform .42s var(--ease);
+}
+.btn:hover{transform:translateY(-3px)}
+.btn:hover::after{transform:translateY(0)}
+.btn:hover i{transform:translateX(4px)}
+.btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+.btn--primary{background:var(--blue);color:#fff;box-shadow:0 16px 30px -14px rgba(27,169,226,.85)}
+.btn--primary::after{background:var(--navy)}
+.btn--primary:hover{box-shadow:0 22px 40px -16px rgba(6,42,62,.6)}
+
+.btn--accent{background:var(--yellow);color:var(--navy);box-shadow:0 16px 30px -14px rgba(245,227,26,.7)}
+.btn--accent::after{background:var(--navy)}
+.btn--accent:hover{color:#fff}
+
+.btn--dark{background:var(--navy);color:#fff}
+.btn--dark::after{background:var(--yellow)}
+.btn--dark:hover{color:var(--navy)}
+
+.btn--white{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
+.btn--white::after{background:var(--yellow)}
+
+.btn--block{width:100%}
+.btn--lg{padding:22px 40px;font-size:.92rem}
+
+/* ============================================================
+   HEADER  (global element in WordPress)
+   ============================================================ */
+.topbar{
+  background:var(--navy);
+  color:rgba(255,255,255,.72);
+  font-size:.82rem;
+  letter-spacing:.03em;
+}
+.topbar__inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;min-height:44px;
+}
+.topbar__list{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.topbar__list a{display:inline-flex;align-items:center;gap:9px;transition:color .25s}
+.topbar__list a:hover{color:var(--yellow)}
+.topbar__list i{color:var(--blue);font-size:.85em}
+.topbar__badge{
+  display:inline-flex;align-items:center;gap:9px;
+  font-weight:700;color:#fff;
+}
+.topbar__badge i{color:var(--yellow)}
+@media (max-width:1024px){.topbar{display:none}}
+
+.site-header{
+  position:sticky;top:0;z-index:900;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .35s var(--ease), padding .35s var(--ease);
+}
+.site-header.is-stuck{box-shadow:0 12px 30px -18px rgba(6,42,62,.45)}
+.header__inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;min-height:var(--header-h);
+  transition:min-height .35s var(--ease);
+}
+.site-header.is-stuck .header__inner{min-height:74px}
+
+.brand{display:flex;align-items:center;flex:none;min-width:0}
+.brand img{
+  width:auto;height:70px;
+  max-width:190px;object-fit:contain;
+  transition:height .35s var(--ease);
+}
+@media (max-width:480px){
+  .brand img{height:58px;max-width:132px}
+}
+.site-header.is-stuck .brand img{height:54px}
+
+.nav{display:flex;align-items:center;gap:6px}
+.nav__link{
+  position:relative;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:12px 16px;
+  font-size:.82rem;font-weight:800;
+  letter-spacing:.11em;text-transform:uppercase;
+  color:var(--navy);
+  transition:color .25s;
+}
+.nav__link::after{
+  content:"";position:absolute;left:16px;right:16px;bottom:4px;
+  height:3px;border-radius:2px;background:var(--yellow);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s var(--ease);
+}
+.nav__link:hover{color:var(--blue-700)}
+.nav__link:hover::after,.nav__link.is-active::after{transform:scaleX(1)}
+.nav__link.is-active{color:var(--blue-700)}
+
+.has-drop{position:relative}
+.has-drop > .nav__link i{font-size:.6rem;transition:transform .3s}
+.has-drop:hover > .nav__link i{transform:rotate(180deg)}
+.drop{
+  position:absolute;top:100%;left:8px;
+  min-width:250px;
+  background:#fff;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  padding:10px;
+  opacity:0;visibility:hidden;
+  transform:translateY(12px);
+  transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+}
+.has-drop:hover .drop{opacity:1;visibility:visible;transform:translateY(0)}
+.drop a{
+  display:block;padding:11px 14px;border-radius:8px;
+  font-size:.92rem;font-weight:600;color:var(--ink-700);
+  transition:background .25s,color .25s,padding-left .25s;
+}
+.drop a:hover{background:var(--blue-050);color:var(--navy);padding-left:20px}
+
+.header__actions{display:flex;align-items:center;gap:14px;flex:none}
+
+/* Circular phone icon, dark background, sits to the LEFT of the hamburger */
+.phone-circle{
+  display:none;
+  width:48px;height:48px;flex:none;
+  align-items:center;justify-content:center;
+  border-radius:50%;
+  background:var(--navy);
+  border:2px solid var(--navy);
+  color:#fff;font-size:1.05rem;
+  box-shadow:0 10px 22px -12px rgba(6,42,62,.8);
+  transition:transform .3s var(--ease), background-color .3s, border-color .3s;
+}
+.phone-circle:hover,.phone-circle:focus-visible{
+  background:var(--blue);border-color:var(--blue);transform:scale(1.06);
+}
+
+.burger{
+  display:none;
+  width:48px;height:48px;flex:none;
+  align-items:center;justify-content:center;
+  flex-direction:column;gap:5px;
+  border-radius:12px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  transition:background .3s;
+}
+.burger span{
+  display:block;width:21px;height:2px;border-radius:2px;
+  background:var(--navy);
+  transition:transform .35s var(--ease), opacity .25s;
+}
+.burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media (max-width:1180px){
+  .nav{display:none}
+  .header__actions .btn{display:none}
+  .phone-circle{display:inline-flex}
+  .burger{display:inline-flex}
+}
+
+/* Mobile drawer */
+.drawer{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(6,42,62,.55);
+  backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity .35s var(--ease), visibility .35s;
+}
+.drawer.is-open{opacity:1;visibility:visible}
+.drawer__panel{
+  position:absolute;top:0;right:0;bottom:0;
+  width:min(400px,88vw);
+  background:#fff;
+  padding:28px 26px 40px;
+  overflow-y:auto;
+  transform:translateX(100%);
+  transition:transform .45s var(--ease);
+  display:flex;flex-direction:column;gap:6px;
+}
+.drawer.is-open .drawer__panel{transform:translateX(0)}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.drawer__head img{height:58px;width:auto;max-width:150px;object-fit:contain}
+.drawer__close{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--surface);color:var(--navy);font-size:1.1rem;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.drawer a.drawer__link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 4px;
+  border-bottom:1px solid var(--line);
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.3rem;font-weight:700;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--navy);
+}
+.drawer a.drawer__link i{color:var(--blue);font-size:.8rem}
+.drawer__sub a{
+  display:block;padding:10px 4px 10px 18px;
+  font-size:.95rem;font-weight:600;color:var(--ink-500);
+  border-bottom:1px solid var(--line);
+}
+.drawer__cta{margin-top:26px;display:grid;gap:12px}
+.drawer__meta{
+  margin-top:26px;padding-top:22px;border-top:1px solid var(--line);
+  font-size:.92rem;display:grid;gap:12px;
+}
+.drawer__meta a{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--navy)}
+.drawer__meta i{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--blue-050);color:var(--blue-700);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;
+}
+
+/* ============================================================
+   HERO  (left: copy + CTAs, right: enquiry form)
+   ============================================================ */
+.hero{
+  position:relative;
+  background:var(--navy);
+  overflow:hidden;
+  padding:clamp(64px,7vw,104px) 0 clamp(72px,8vw,120px);
+  isolation:isolate;
+}
+.hero__bg{
+  position:absolute;inset:-6% 0 0;
+  background:url("https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-120bk.jpg") center/cover no-repeat;
+  z-index:-3;
+  will-change:transform;
+}
+.hero__veil{
+  position:absolute;inset:0;z-index:-2;
+  background:
+    linear-gradient(103deg, rgba(4,26,39,.95) 0%, rgba(5,33,49,.9) 42%, rgba(6,42,62,.66) 72%, rgba(6,42,62,.5) 100%);
+}
+.hero__glow{
+  position:absolute;z-index:-1;pointer-events:none;
+  width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle, rgba(27,169,226,.42) 0%, rgba(27,169,226,0) 68%);
+  top:-180px;left:-150px;
+  animation:float 16s ease-in-out infinite;
+}
+.hero__glow--2{
+  width:480px;height:480px;top:auto;left:auto;bottom:-190px;right:34%;
+  background:radial-gradient(circle, rgba(245,227,26,.22) 0%, rgba(245,227,26,0) 70%);
+  animation-delay:-7s;
+}
+@keyframes float{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(28px,-34px,0)}
+}
+
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:clamp(36px,5vw,76px);
+  align-items:center;
+}
+@media (max-width:1100px){
+  .hero__grid{grid-template-columns:1fr;gap:44px}
+}
+
+.hero__content{color:rgba(255,255,255,.82);max-width:720px;min-width:0}
+.hero h1{color:#fff;margin-bottom:22px}
+.hero h1 .hl{
+  color:var(--yellow);
+  position:relative;display:inline-block;
+}
+.hero h1 .hl::after{
+  content:"";position:absolute;left:0;right:0;bottom:6px;height:9px;
+  background:rgba(27,169,226,.55);
+  z-index:-1;border-radius:3px;
+  transform:scaleX(0);transform-origin:left;
+  animation:swipe 1s var(--ease) .75s forwards;
+}
+@keyframes swipe{to{transform:scaleX(1)}}
+
+.hero__text{font-size:1.14rem;color:rgba(255,255,255,.8);margin-bottom:30px}
+
+.hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
+
+.hero__proof{
+  display:flex;flex-wrap:wrap;gap:14px 30px;
+  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.16);
+}
+.hero__proof li{
+  display:flex;align-items:center;gap:11px;
+  font-size:.92rem;font-weight:600;color:rgba(255,255,255,.86);
+}
+.hero__proof i{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.78rem;flex:none;
+}
+
+/* Hero form card */
+.hero-form{
+  background:#fff;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);
+  padding:clamp(26px,2.6vw,38px);
+  position:relative;
+  border-top:6px solid var(--yellow);
+}
+.hero-form__flag{
+  position:absolute;top:-16px;right:26px;
+  background:var(--blue);color:#fff;
+  font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 16px;border-radius:8px;
+  box-shadow:0 12px 24px -12px rgba(27,169,226,.9);
+}
+.hero-form h2{
+  font-size:clamp(1.65rem,2.1vw,2.05rem);
+  margin-bottom:8px;
+}
+.hero-form__sub{font-size:.95rem;color:var(--ink-500);margin-bottom:24px}
+
+.field{margin-bottom:14px;position:relative}
+.field label{
+  display:block;
+  font-size:.7rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:7px;
+}
+.field input,.field select,.field textarea{
+  width:100%;
+  font-family:inherit;font-size:.97rem;color:var(--navy);
+  padding:14px 16px;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  transition:border-color .25s, background-color .25s, box-shadow .25s;
+  -webkit-appearance:none;appearance:none;
+}
+.field textarea{min-height:104px;resize:vertical}
+.field select{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23062A3E' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:17px;
+  padding-right:42px;
+}
+.field input::placeholder,.field textarea::placeholder{color:#93A7B2}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;background:#fff;border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(27,169,226,.14);
+}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.field-row{grid-template-columns:1fr}}
+
+.form-note{
+  display:flex;align-items:flex-start;gap:9px;
+  font-size:.79rem;line-height:1.55;color:var(--ink-500);
+  margin-top:14px;
+}
+.form-note i{color:var(--blue);margin-top:3px}
+
+/* ============================================================
+   TRUST BAR
+   ============================================================ */
+.trustbar{
+  background:var(--yellow);
+  padding:22px 0;
+}
+.trustbar__inner{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:18px 34px;
+}
+@media (max-width:860px){
+  .trustbar__inner{justify-content:center;text-align:center}
+  .trustbar__item{flex:1 1 100%;justify-content:center}
+}
+.trustbar__item{
+  display:flex;align-items:center;gap:13px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.14rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--navy);
+}
+.trustbar__item i{font-size:1.3rem;color:var(--navy)}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services__grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
+}
+@media (max-width:1024px){.services__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.services__grid{grid-template-columns:1fr}}
+.s-card{
+  position:relative;display:flex;flex-direction:column;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:36px 32px 34px;
+  overflow:hidden;
+  isolation:isolate;
+  color:var(--ink-700);
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s;
+}
+.s-card::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(160deg,var(--navy) 0%, #0B3D58 100%);
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.s-card::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--yellow));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.s-card:hover,.s-card:focus-visible{
+  transform:translateY(-10px);
+  box-shadow:var(--shadow-lg);
+  border-color:transparent;
+  outline:none;
+}
+.s-card:hover::before,.s-card:focus-visible::before{opacity:1}
+.s-card:hover::after,.s-card:focus-visible::after{transform:scaleX(1)}
+
+.s-card__icon{
+  width:66px;height:66px;border-radius:16px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--blue-050);color:var(--blue-700);
+  font-size:1.5rem;margin-bottom:22px;
+  transition:background-color .45s var(--ease), color .45s var(--ease), transform .45s var(--ease);
+}
+.s-card:hover .s-card__icon{background:var(--yellow);color:var(--navy);transform:rotate(-6deg) scale(1.06)}
+.s-card h3{margin-bottom:12px;transition:color .45s}
+.s-card p{font-size:.97rem;margin-bottom:22px;transition:color .45s}
+.s-card__more{
+  margin-top:auto;
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue-700);
+  transition:color .45s, gap .3s;
+}
+.s-card:hover h3{color:#fff}
+.s-card:hover p{color:rgba(255,255,255,.76)}
+.s-card:hover .s-card__more{color:var(--yellow);gap:16px}
+
+/* ============================================================
+   SPLIT / ABOUT
+   ============================================================ */
+.split{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(36px,5vw,80px);
+  align-items:center;
+}
+@media (max-width:980px){.split{grid-template-columns:1fr}}
+
+.media-stack{position:relative;padding:0 0 46px 46px}
+.media-stack__main{
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.media-stack__main img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.media-stack__sub{
+  position:absolute;left:0;bottom:0;
+  width:46%;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:7px solid #fff;
+  box-shadow:var(--shadow);
+}
+.media-stack__sub img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.media-stack__badge{
+  position:absolute;top:26px;right:-14px;
+  background:var(--yellow);
+  color:var(--navy);
+  border-radius:14px;
+  padding:18px 22px;
+  text-align:center;
+  box-shadow:var(--shadow);
+  line-height:1;
+}
+.media-stack__badge strong{
+  display:block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:2.5rem;font-weight:700;
+}
+.media-stack__badge span{
+  font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+}
+@media (max-width:560px){
+  .media-stack{padding:0 0 36px 0}
+  .media-stack__sub{display:none}
+  .media-stack__badge{right:14px}
+}
+
+.check-list{display:grid;gap:14px;margin:26px 0 32px}
+.check-list li{display:flex;align-items:flex-start;gap:14px;font-size:1rem}
+.check-list i{
+  width:26px;height:26px;border-radius:50%;flex:none;margin-top:3px;
+  background:var(--blue);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;
+}
+.check-list strong{color:var(--navy);font-weight:700}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats{
+  position:relative;
+  background:var(--navy);
+  overflow:hidden;
+  padding:clamp(68px,7vw,108px) 0;
+}
+.stats__bg{
+  position:absolute;inset:-8% 0 0;
+  background:url("https://aiw.co.nz/wp-content/uploads/2015/12/about-call-to-action-57862405.jpg") center/cover no-repeat;
+  opacity:.16;will-change:transform;
+}
+.stats__inner{position:relative}
+.stats__grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:26px;
+  margin-top:48px;
+}
+@media (max-width:900px){.stats__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.stats__grid{grid-template-columns:1fr}}
+
+.stat{
+  text-align:center;
+  padding:34px 20px;
+  border-radius:var(--radius);
+  background:#08324A;
+  border:1px solid rgba(255,255,255,.1);
+  transition:transform .4s var(--ease), background-color .4s;
+}
+.stat:hover{transform:translateY(-8px);background:#0A3C58}
+.stat i{font-size:1.6rem;color:var(--yellow);margin-bottom:14px;display:block}
+.stat__num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(2.6rem,4vw,3.6rem);
+  font-weight:700;color:#fff;line-height:1;
+  display:flex;align-items:baseline;justify-content:center;gap:4px;
+}
+.stat__num .unit{font-size:.44em;color:var(--blue)}
+.stat__label{
+  margin-top:12px;
+  font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+}
+
+/* ============================================================
+   WORK GALLERY
+   ============================================================ */
+.work__grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+@media (max-width:980px){.work__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.work__grid{grid-template-columns:1fr}}
+
+.work-card{
+  position:relative;display:block;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  isolation:isolate;
+}
+.work-card img{
+  width:100%;aspect-ratio:16/11;object-fit:cover;
+  transition:transform .8s var(--ease);
+}
+.work-card::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(4,26,39,.92) 4%, rgba(4,26,39,.42) 46%, rgba(4,26,39,0) 78%);
+  transition:opacity .45s;
+}
+.work-card:hover img{transform:scale(1.09)}
+.work-card__body{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:28px 26px;
+  color:#fff;
+  transform:translateY(12px);
+  transition:transform .45s var(--ease);
+}
+.work-card:hover .work-card__body{transform:translateY(0)}
+.work-card__tag{
+  display:inline-block;
+  background:var(--yellow);color:var(--navy);
+  font-size:.64rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  padding:6px 12px;border-radius:6px;margin-bottom:12px;
+}
+.work-card h3{color:#fff;margin:0 0 6px;font-size:1.4rem}
+.work-card__meta{
+  font-size:.84rem;color:rgba(255,255,255,.74);
+  display:flex;align-items:center;gap:9px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s var(--ease) .06s, transform .4s var(--ease) .06s;
+}
+.work-card:hover .work-card__meta{opacity:1;transform:translateY(0)}
+.work-card__meta i{color:var(--yellow)}
+
+/* ============================================================
+   VALUES
+   ============================================================ */
+.values__grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+}
+@media (max-width:1024px){.values__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.values__grid{grid-template-columns:1fr}}
+
+.value{
+  background:#fff;
+  border-radius:var(--radius);
+  padding:34px 28px;
+  border:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.value:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.value__num{
+  position:absolute;top:14px;right:20px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:3.6rem;font-weight:700;
+  color:var(--blue-050);
+  line-height:1;
+}
+.value i.value__icon{
+  width:56px;height:56px;border-radius:14px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1.25rem;color:#fff;margin-bottom:20px;
+  background:var(--blue);
+  transition:transform .4s var(--ease);
+}
+.value:hover i.value__icon{transform:rotate(-8deg)}
+.value:nth-child(2) i.value__icon{background:var(--navy)}
+.value:nth-child(3) i.value__icon{background:var(--yellow);color:var(--navy)}
+.value:nth-child(4) i.value__icon{background:var(--blue-700)}
+.value h3{font-size:1.28rem;margin-bottom:10px}
+.value p{font-size:.95rem;margin:0}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process__grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  position:relative;
+}
+@media (max-width:1024px){.process__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.process__grid{grid-template-columns:1fr}}
+
+.step{
+  position:relative;
+  padding:32px 26px;
+  border-radius:var(--radius);
+  background:#08324A;
+  border:1px solid rgba(255,255,255,.1);
+  transition:transform .4s var(--ease), background-color .4s;
+}
+.step:hover{transform:translateY(-8px);background:#0A3C58}
+.step__n{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--yellow);color:var(--navy);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:700;
+  margin-bottom:20px;
+}
+.step h3{font-size:1.24rem;color:#fff;margin-bottom:10px}
+.step p{font-size:.95rem;color:rgba(255,255,255,.72);margin:0}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.tstm{position:relative;overflow:hidden;background:var(--navy)}
+.tstm__bg{
+  position:absolute;inset:0;
+  background:url("https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-113BK-1024x683.jpg") center/cover no-repeat;
+  opacity:.14;
+}
+.tstm__inner{position:relative}
+.tstm__stage{position:relative;min-height:260px}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transform:translateY(22px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease), visibility .6s;
+  text-align:center;
+}
+.slide.is-active{opacity:1;visibility:visible;transform:translateY(0);position:relative}
+.slide__quote{
+  font-family:'Manrope',sans-serif;
+  font-size:clamp(1.05rem,1.55vw,1.4rem);
+  line-height:1.72;
+  color:#fff;
+  font-weight:500;
+  margin-bottom:26px;
+}
+.slide__stars{color:var(--yellow);font-size:1rem;letter-spacing:.24em;margin-bottom:22px}
+.slide__who{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.25rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--yellow);
+}
+.slide__role{font-size:.86rem;color:rgba(255,255,255,.62);letter-spacing:.05em}
+.tstm__dots{display:flex;justify-content:center;gap:10px;margin-top:34px}
+.tstm__dots button{
+  width:11px;height:11px;border-radius:50%;
+  background:#124B6B;
+  transition:background-color .3s, width .3s var(--ease);
+}
+.tstm__dots button.is-active{background:var(--yellow);width:32px;border-radius:6px}
+
+/* ============================================================
+   PARTNERS MARQUEE
+   ============================================================ */
+.marquee{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.marquee__track{
+  display:flex;align-items:center;gap:70px;
+  width:max-content;
+  animation:scroll-x 34s linear infinite;
+}
+.marquee:hover .marquee__track{animation-play-state:paused}
+@keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee img{
+  height:74px;width:auto;object-fit:contain;
+  filter:grayscale(1);opacity:.55;
+  transition:filter .35s, opacity .35s, transform .35s var(--ease);
+}
+.marquee img:hover{filter:grayscale(0);opacity:1;transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){
+  .marquee__track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}
+}
+
+/* ============================================================
+   CTA BAND
+   ============================================================ */
+.cta-band{
+  position:relative;overflow:hidden;
+  background:linear-gradient(112deg,var(--blue) 0%, var(--blue-700) 58%, var(--navy) 100%);
+  padding:clamp(56px,6vw,86px) 0;
+}
+.cta-band::before{
+  content:"";position:absolute;top:-120px;right:-80px;
+  width:420px;height:420px;border-radius:50%;
+  background:rgba(245,227,26,.16);
+}
+.cta-band__inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:30px;flex-wrap:wrap;
+}
+.cta-band h2{color:#fff;margin-bottom:8px}
+.cta-band p{color:rgba(255,255,255,.88);font-size:1.06rem;margin:0}
+.cta-band__actions{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ============================================================
+   CONTACT (info + map + form)
+   ============================================================ */
+.contact__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(34px,4vw,60px);
+  align-items:start;
+}
+@media (max-width:1024px){.contact__grid{grid-template-columns:1fr}}
+
+.info-list{display:grid;gap:18px;margin:30px 0 32px}
+.info-item{
+  display:flex;gap:18px;align-items:flex-start;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:20px 22px;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+}
+.info-item:hover{transform:translateX(6px);box-shadow:var(--shadow-sm);border-color:var(--blue-100)}
+.info-item i{
+  width:48px;height:48px;border-radius:12px;flex:none;
+  background:var(--navy);color:var(--yellow);
+  display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem;
+}
+.info-item h4{
+  font-size:1.02rem;margin:0 0 4px;letter-spacing:.06em;
+}
+.info-item p,.info-item a{font-size:.97rem;margin:0;color:var(--ink-700);display:block}
+.info-item a:hover{color:var(--blue-700)}
+
+.map-frame{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  line-height:0;
+}
+.map-frame iframe{width:100%;height:330px;border:0;filter:grayscale(.3) contrast(1.05)}
+
+.contact-card{
+  background:#fff;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  border:1px solid var(--line);
+  padding:clamp(28px,3vw,44px);
+  border-top:6px solid var(--blue);
+}
+.contact-card h3{font-size:clamp(1.55rem,2vw,1.95rem);margin-bottom:8px}
+.contact-card__sub{font-size:.97rem;color:var(--ink-500);margin-bottom:26px}
+
+/* ============================================================
+   FOOTER  (global element in WordPress)
+   ============================================================ */
+.site-footer{background:var(--navy);color:rgba(255,255,255,.66);padding-top:clamp(56px,6vw,86px)}
+.footer__grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1.25fr;
+  gap:40px;
+  padding-bottom:52px;
+}
+@media (max-width:980px){.footer__grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media (max-width:560px){.footer__grid{grid-template-columns:1fr}}
+
+.footer__logo{height:96px;width:auto;max-width:210px;object-fit:contain;margin-bottom:22px}
+.site-footer p{font-size:.95rem;line-height:1.75}
+.footer__title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.2rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;margin:0 0 22px;position:relative;padding-bottom:14px;
+}
+.footer__title::after{
+  content:"";position:absolute;left:0;bottom:0;width:44px;height:3px;
+  background:var(--yellow);border-radius:2px;
+}
+.footer__links li{margin-bottom:11px}
+.footer__links a{
+  font-size:.95rem;display:inline-flex;align-items:center;gap:10px;
+  transition:color .25s, gap .25s;
+}
+.footer__links a::before{content:"\f105";font-family:"Font Awesome 6 Free";font-weight:900;color:var(--blue);font-size:.8rem}
+.footer__links a:hover{color:var(--yellow);gap:14px}
+
+.footer__contact li{display:flex;gap:14px;margin-bottom:16px;font-size:.95rem;align-items:flex-start}
+.footer__contact i{
+  width:34px;height:34px;border-radius:50%;flex:none;
+  background:#08324A;color:var(--blue);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;
+}
+.footer__contact a:hover{color:var(--yellow)}
+
+.footer__social{display:flex;gap:11px;margin-top:22px}
+.footer__social a{
+  width:42px;height:42px;border-radius:12px;
+  background:#08324A;color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background-color .3s, transform .3s var(--ease), color .3s;
+}
+.footer__social a:hover{background:var(--yellow);color:var(--navy);transform:translateY(-4px)}
+
+.footer__bar{
+  border-top:1px solid rgba(255,255,255,.12);
+  padding:24px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  font-size:.86rem;
+}
+.footer__bar nav{display:flex;gap:22px;flex-wrap:wrap}
+.footer__bar a:hover{color:var(--yellow)}
+
+/* ============================================================
+   FLOATING UI
+   ============================================================ */
+
+/* Mobile call now button, bottom centre */
+.call-now{
+  position:fixed;
+  left:50%;bottom:20px;
+  transform:translate(-50%,130%);
+  z-index:950;
+  display:none;
+  align-items:center;justify-content:center;gap:12px;
+  padding:17px 34px;
+  border-radius:60px;
+  background:var(--blue);
+  color:#fff;
+  font-size:.88rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;
+  box-shadow:0 18px 34px -12px rgba(6,42,62,.65);
+  transition:transform .45s var(--ease), background-color .3s;
+  white-space:nowrap;
+}
+.call-now.is-visible{transform:translate(-50%,0)}
+.call-now:active{background:var(--blue-700)}
+.call-now i{font-size:1rem;animation:ring 2.6s ease-in-out infinite}
+@keyframes ring{
+  0%,72%,100%{transform:rotate(0)}
+  76%{transform:rotate(-14deg)}
+  80%{transform:rotate(12deg)}
+  84%{transform:rotate(-10deg)}
+  88%{transform:rotate(8deg)}
+  92%{transform:rotate(0)}
+}
+@media (max-width:860px){
+  .call-now{display:inline-flex}
+  body{padding-bottom:86px}
+}
+
+/* Scroll to top, sits ABOVE the reCAPTCHA badge in the bottom right */
+.to-top{
+  position:fixed;
+  right:22px;
+  bottom:96px;          /* clears the reCAPTCHA badge that renders at bottom right */
+  z-index:940;
+  width:50px;height:50px;
+  border-radius:14px;
+  background:var(--navy);
+  color:#fff;font-size:1rem;
+  display:inline-flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 28px -12px rgba(6,42,62,.7);
+  opacity:0;visibility:hidden;
+  transform:translateY(16px);
+  transition:opacity .35s var(--ease), transform .35s var(--ease), visibility .35s, background-color .3s;
+}
+.to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
+.to-top:hover{background:var(--blue)}
+@media (max-width:860px){
+  .to-top{bottom:170px;right:16px;width:46px;height:46px}
+}
+
+/* Reserved footprint for the reCAPTCHA badge so the scroll to top button clears it.
+   This is a spacing guide only, not the badge itself. Delete it in WordPress,
+   where the real badge renders in the same bottom right position. */
+.recaptcha-slot{
+  position:fixed;right:22px;bottom:14px;z-index:930;
+  width:70px;height:70px;border-radius:6px;
+  border:1px dashed #9AA6AE;
+  background:#F2F5F7;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.52rem;font-weight:700;letter-spacing:.04em;
+  line-height:1.25;text-align:center;color:#6B7B85;
+  padding:6px;pointer-events:none;
+}
+@media (max-width:860px){.recaptcha-slot{right:16px;bottom:96px}}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+[data-reveal]{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+  will-change:opacity,transform;
+}
+[data-reveal].is-in{opacity:1;transform:none}
+[data-reveal="left"]{transform:translateX(-42px)}
+[data-reveal="right"]{transform:translateX(42px)}
+[data-reveal="zoom"]{transform:scale(.94)}
+
+/* On narrow screens a sideways offset would overhang the viewport, so reveal upward */
+@media (max-width:1024px){
+  [data-reveal="left"],[data-reveal="right"]{transform:translateY(34px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  [data-reveal]{opacity:1;transform:none}
+}
+</style>
+
+<noscript>
+  <style>
+    /* Without JavaScript the reveal observer never runs, so show everything */
+    [data-reveal]{opacity:1 !important;transform:none !important}
+  </style>
+</noscript>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER  (global in WordPress, included here for preview)
+     ============================================================ -->
+<div class="topbar">
+  <div class="wrap topbar__inner">
+    <div class="topbar__badge">
+      <i class="fa-solid fa-shield-check"></i>
+      Licensed Building Practitioners and Site Safe accredited
+    </div>
+    <ul class="topbar__list">
+      <li><a href="tel:+6421928379"><i class="fa-solid fa-phone"></i> 021 WATER 9 / 021 928 379</a></li>
+      <li><a href="mailto:admin@aiw.co.nz"><i class="fa-solid fa-envelope"></i> admin@aiw.co.nz</a></li>
+      <li><a href="#contact"><i class="fa-solid fa-location-dot"></i> Remuera, Auckland</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header__inner">
+    <a class="brand" href="/" aria-label="Auckland Integrity Waterproofing home">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png" alt="Auckland Integrity Waterproofing">
+    </a>
+
+    <nav class="nav" aria-label="Main menu">
+      <a class="nav__link is-active" href="#top">Home</a>
+      <a class="nav__link" href="#about">About</a>
+      <div class="has-drop">
+        <a class="nav__link" href="#services">Services <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="drop">
+          <a href="#services">Flat Roof Membranes</a>
+          <a href="#services">Green Roof Systems</a>
+          <a href="#services">Below Ground Tanking</a>
+          <a href="#services">Torch On Membranes</a>
+          <a href="#services">TPO Single Ply</a>
+          <a href="#services">Liquid Membranes</a>
+        </div>
+      </div>
+      <div class="has-drop">
+        <a class="nav__link" href="#work">Work <i class="fa-solid fa-chevron-down"></i></a>
+        <div class="drop">
+          <a href="#work">Life Church Auckland</a>
+          <a href="#work">Nutritech International</a>
+          <a href="#work">Park Ave, Takapuna</a>
+          <a href="#work">Lone Kauri Road, Karekare</a>
+        </div>
+      </div>
+      <a class="nav__link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="btn btn--primary" href="#quote">Get a Free Quote <i class="fa-solid fa-arrow-right"></i></a>
+      <!-- Circular phone icon with dark background, to the left of the hamburger -->
+      <a class="phone-circle" href="tel:+6421928379" aria-label="Call Auckland Integrity Waterproofing">
+        <i class="fa-solid fa-phone"></i>
+      </a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Mobile menu">
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png" alt="Auckland Integrity Waterproofing">
+      <button class="drawer__close" id="drawerClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a class="drawer__link" href="#top">Home</a>
+    <a class="drawer__link" href="#about">About</a>
+    <a class="drawer__link" href="#services">Services</a>
+    <div class="drawer__sub">
+      <a href="#services">Flat Roof Membranes</a>
+      <a href="#services">Green Roof Systems</a>
+      <a href="#services">Below Ground Tanking</a>
+      <a href="#services">Torch On Membranes</a>
+      <a href="#services">TPO Single Ply</a>
+      <a href="#services">Liquid Membranes</a>
+    </div>
+    <a class="drawer__link" href="#work">Recent Work</a>
+    <a class="drawer__link" href="#contact">Contact</a>
+
+    <div class="drawer__cta">
+      <a class="btn btn--primary btn--block" href="#quote">Get a Free Quote</a>
+      <a class="btn btn--dark btn--block" href="tel:+6421928379"><i class="fa-solid fa-phone"></i> Call 021 WATER 9</a>
+    </div>
+
+    <div class="drawer__meta">
+      <a href="tel:+6421928379"><i class="fa-solid fa-phone"></i> 021 WATER 9 / 021 928 379</a>
+      <a href="mailto:admin@aiw.co.nz"><i class="fa-solid fa-envelope"></i> admin@aiw.co.nz</a>
+      <a href="#contact"><i class="fa-solid fa-location-dot"></i> Remuera, Auckland</a>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="quote">
+  <div class="hero__bg" data-parallax="0.16"></div>
+  <div class="hero__veil"></div>
+  <div class="hero__glow"></div>
+  <div class="hero__glow hero__glow--2"></div>
+
+  <div class="wrap hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow eyebrow--light" data-reveal>Auckland Waterproofing Specialists Since 2012</p>
+      <h1 data-reveal>Waterproofing <span class="hl">That Works</span>, First Time and Every Time</h1>
+      <p class="hero__text" data-reveal>
+        We install certified membrane, tanking and torch on systems for residential and
+        commercial builds across Auckland. Warranted workmanship, clean sites and detailing
+        that holds up to a Tamaki Makaurau winter.
+      </p>
+
+      <div class="hero__actions" data-reveal>
+        <a class="btn btn--accent btn--lg" href="#contact">Book a Free Site Assessment <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn--primary btn--lg" href="tel:+6421928379"><i class="fa-solid fa-phone"></i> 021 WATER 9</a>
+      </div>
+
+      <ul class="hero__proof" data-reveal>
+        <li><i class="fa-solid fa-check"></i> 855+ projects completed</li>
+        <li><i class="fa-solid fa-check"></i> Approved applicator status</li>
+        <li><i class="fa-solid fa-check"></i> 15+ years average crew experience</li>
+      </ul>
+    </div>
+
+    <!-- Hero enquiry form -->
+    <aside class="hero-form" data-reveal="right" aria-label="Request a quote">
+      <span class="hero-form__flag">Fast response</span>
+      <h2>Get Your Free Quote</h2>
+      <p class="hero-form__sub">Send us the detail and we will come back with a scoped price, usually within one working day.</p>
+
+      <form action="#" method="post" novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="h-name">Full name</label>
+            <input type="text" id="h-name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="field">
+            <label for="h-phone">Phone</label>
+            <input type="tel" id="h-phone" name="phone" placeholder="021 123 4567" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="h-email">Email address</label>
+          <input type="email" id="h-email" name="email" placeholder="you@company.co.nz" required>
+        </div>
+
+        <div class="field">
+          <label for="h-service">What do you need waterproofed</label>
+          <select id="h-service" name="service">
+            <option value="">Please select a service</option>
+            <option>Flat roof membrane</option>
+            <option>Deck or balcony</option>
+            <option>Below ground tanking</option>
+            <option>Torch on membrane</option>
+            <option>TPO single ply</option>
+            <option>Liquid membrane or remedial</option>
+            <option>Green roof system</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="h-msg">Project details</label>
+          <textarea id="h-msg" name="message" placeholder="Site address, approximate area and timeframe"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--accent btn--block btn--lg">Send My Enquiry <i class="fa-solid fa-arrow-right"></i></button>
+
+        <p class="form-note">
+          <i class="fa-solid fa-lock"></i>
+          Your details stay with our estimating team. No obligation and no sales pressure.
+        </p>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<!-- Trust bar -->
+<div class="trustbar">
+  <div class="wrap trustbar__inner">
+    <div class="trustbar__item"><i class="fa-solid fa-certificate"></i> Licensed Building Practitioners</div>
+    <div class="trustbar__item"><i class="fa-solid fa-helmet-safety"></i> Site Safe Accredited</div>
+    <div class="trustbar__item"><i class="fa-solid fa-file-shield"></i> Manufacturer Backed Warranties</div>
+    <div class="trustbar__item"><i class="fa-solid fa-droplet"></i> Residential and Commercial</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SERVICES
+     ============================================================ -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Specialists in Waterproofing Membranes</p>
+      <h2>Systems Built for the Way Auckland Weather Behaves</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">
+        New builds, renovations and remedial work. We match the membrane to the substrate,
+        the detail and the design life, then install it to the manufacturer specification.
+      </p>
+    </div>
+
+    <div class="services__grid">
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-house-chimney"></i></span>
+        <h3>Flat Roof Membranes</h3>
+        <p>Flat roofs and decks take the worst of the weather. We specify and install a system that suits your design, your fall and your budget.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-seedling"></i></span>
+        <h3>Green Roof Systems</h3>
+        <p>Roof gardens carry deep soil, mature planting and irrigation. We protect the structure and the living spaces underneath with a root resistant build up.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-layer-group"></i></span>
+        <h3>Below Ground Tanking</h3>
+        <p>Tanking has to be right the first time because there is no second chance once the backfill goes in. It is an integral part of the foundation.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
+        <h3>Torch On Membranes</h3>
+        <p>Modified bitumen sheets with generous overlaps, ideal for roofs, decks, basements and planter boxes where durability is the priority.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-recycle"></i></span>
+        <h3>TPO Single Ply</h3>
+        <p>Thermoplastic polyolefin is heat welded at the seams, free of toxic plasticisers and highly reflective. A clean, sustainable roofing answer.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-droplet"></i></span>
+        <h3>Liquid Membranes</h3>
+        <p>Seamless coatings for remedial and maintenance work, applied over timber, concrete and a range of existing substrates with tricky detailing.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ABOUT SPLIT
+     ============================================================ -->
+<section class="section section--surface" id="about">
+  <div class="wrap split">
+    <div class="media-stack" data-reveal="left">
+      <div class="media-stack__main">
+        <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-122-460x295.jpg"
+             alt="Waterproofing membrane being installed on an Auckland build" loading="lazy">
+      </div>
+      <div class="media-stack__sub">
+        <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
+             alt="Detailing work on a commercial waterproofing project" loading="lazy">
+      </div>
+      <div class="media-stack__badge">
+        <strong>20+</strong>
+        <span>Years in the industry</span>
+      </div>
+    </div>
+
+    <div data-reveal="right">
+      <p class="eyebrow">About Auckland Integrity Waterproofing</p>
+      <h2>One of Auckland's Largest Waterproofing Application Teams</h2>
+      <div class="rule"></div>
+      <p class="lead">
+        We are Licensed Building Practitioners with more than twenty years of construction
+        waterproofing behind us. Whether it is a large commercial tanking package or a small
+        residential deck, every project gets the same standard of detailing and the same
+        honest advice about the right system to use.
+      </p>
+
+      <ul class="check-list">
+        <li><i class="fa-solid fa-check"></i><span><strong>Approved applicator status</strong> with the major New Zealand membrane suppliers, so your warranty stands up.</span></li>
+        <li><i class="fa-solid fa-check"></i><span><strong>Programme driven.</strong> We stage our work around your build so the next trade is never waiting on us.</span></li>
+        <li><i class="fa-solid fa-check"></i><span><strong>Tidy, safe sites.</strong> Site Safe accredited crews who leave the area clean at the end of every day.</span></li>
+        <li><i class="fa-solid fa-check"></i><span><strong>Straight answers on tricky details</strong> such as gutter junctions, penetrations and upstands.</span></li>
+      </ul>
+
+      <a class="btn btn--dark btn--lg" href="#contact">Talk to Our Team <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="stats">
+  <div class="stats__bg" data-parallax="0.1"></div>
+  <div class="wrap stats__inner">
+    <div class="section-head section-head--center" style="margin-bottom:0" data-reveal>
+      <p class="eyebrow eyebrow--center eyebrow--light">By the Numbers</p>
+      <h2>A Track Record You Can Check</h2>
+    </div>
+
+    <div class="stats__grid">
+      <div class="stat" data-reveal>
+        <i class="fa-solid fa-scroll"></i>
+        <div class="stat__num"><span class="counter" data-to="22">0</span><span class="unit">kms</span></div>
+        <div class="stat__label">Material applied</div>
+      </div>
+      <div class="stat" data-reveal>
+        <i class="fa-regular fa-building"></i>
+        <div class="stat__num"><span class="counter" data-to="855">0</span><span class="unit">+</span></div>
+        <div class="stat__label">Completed projects</div>
+      </div>
+      <div class="stat" data-reveal>
+        <i class="fa-solid fa-users"></i>
+        <div class="stat__num"><span class="counter" data-to="15">0</span><span class="unit">yrs</span></div>
+        <div class="stat__label">Average crew experience</div>
+      </div>
+      <div class="stat" data-reveal>
+        <i class="fa-solid fa-award"></i>
+        <div class="stat__num"><span class="counter" data-to="13">0</span><span class="unit">yrs</span></div>
+        <div class="stat__label">In business since 2012</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WORK
+     ============================================================ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Explore Recent Work</p>
+      <h2>Projects Delivered Across Tamaki Makaurau</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">
+        Membrane applications, tanking and remedial work on live sites around Auckland.
+        Have a look at what we have been building lately.
+      </p>
+    </div>
+
+    <div class="work__grid">
+      <a class="work-card" href="#work" data-reveal="zoom">
+        <img src="https://aiw.co.nz/wp-content/uploads/2017/02/Auckland-Waterproofing-Membrane-Tanking-134-460x295.jpg"
+             alt="Residential membrane roof project in Auckland" loading="lazy">
+        <div class="work-card__body">
+          <span class="work-card__tag">Residential</span>
+          <h3>Life Church Auckland</h3>
+          <p class="work-card__meta"><i class="fa-solid fa-location-dot"></i> Torch on membrane and detailing</p>
+        </div>
+      </a>
+
+      <a class="work-card" href="#work" data-reveal="zoom">
+        <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-122-460x295.jpg"
+             alt="Commercial tanking project in Auckland" loading="lazy">
+        <div class="work-card__body">
+          <span class="work-card__tag">Commercial</span>
+          <h3>Nutritech International</h3>
+          <p class="work-card__meta"><i class="fa-solid fa-location-dot"></i> Below ground tanking package</p>
+        </div>
+      </a>
+
+      <a class="work-card" href="#work" data-reveal="zoom">
+        <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
+             alt="Deck and balcony waterproofing in Takapuna" loading="lazy">
+        <div class="work-card__body">
+          <span class="work-card__tag">New Build</span>
+          <h3>Park Ave, Takapuna</h3>
+          <p class="work-card__meta"><i class="fa-solid fa-location-dot"></i> Deck membrane and upstands</p>
+        </div>
+      </a>
+    </div>
+
+    <div style="text-align:center;margin-top:44px" data-reveal>
+      <a class="btn btn--primary btn--lg" href="#work">View the Full Portfolio <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALUES
+     ============================================================ -->
+<section class="section section--surface values">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Our Core Values</p>
+      <h2>Why Builders Keep Calling Us Back</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">
+        We hold the same standard of workmanship on a small deck as we do on a large
+        commercial tanking package. That consistency is the whole business.
+      </p>
+    </div>
+
+    <div class="values__grid">
+      <div class="value" data-reveal>
+        <span class="value__num">01</span>
+        <i class="fa-solid fa-handshake value__icon"></i>
+        <h3>Great Service</h3>
+        <p>We stand by every word we give you and deliver precisely what we promised, on the date we promised it.</p>
+      </div>
+      <div class="value" data-reveal>
+        <span class="value__num">02</span>
+        <i class="fa-solid fa-crown value__icon"></i>
+        <h3>Highest Standards</h3>
+        <p>Integrity is the foundation of this business. It is in our name and it governs every decision we make on site.</p>
+      </div>
+      <div class="value" data-reveal>
+        <span class="value__num">03</span>
+        <i class="fa-solid fa-users value__icon"></i>
+        <h3>Professional Team</h3>
+        <p>Our applicators average fifteen years in waterproofing. Licensed Building Practitioners and Site Safe accredited.</p>
+      </div>
+      <div class="value" data-reveal>
+        <span class="value__num">04</span>
+        <i class="fa-regular fa-lightbulb value__icon"></i>
+        <h3>Creative Solutions</h3>
+        <p>Tricky detail on a flat roof gutter junction? Talk to us about the best way to keep the water where it belongs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+     ============================================================ -->
+<section class="section section--navy">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center eyebrow--light">How We Work</p>
+      <h2>Four Steps From First Call to Signed Off Warranty</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">A clear process means no surprises for your programme and no gaps in the detailing.</p>
+    </div>
+
+    <div class="process__grid">
+      <div class="step" data-reveal>
+        <span class="step__n">1</span>
+        <h3>Site Assessment</h3>
+        <p>We walk the site, read the plans and confirm the substrate, the falls and the details that need attention.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="step__n">2</span>
+        <h3>Specification and Quote</h3>
+        <p>You get a scoped, itemised price with the membrane system named and the warranty terms spelled out.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="step__n">3</span>
+        <h3>Installation</h3>
+        <p>Our crews install to the manufacturer specification, staged around your build programme and other trades.</p>
+      </div>
+      <div class="step" data-reveal>
+        <span class="step__n">4</span>
+        <h3>Test and Hand Over</h3>
+        <p>Flood testing where required, producer statements issued and your manufacturer backed warranty registered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+     ============================================================ -->
+<section class="section tstm">
+  <div class="tstm__bg"></div>
+  <div class="wrap tstm__inner">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center eyebrow--light">What Our Clients Say</p>
+      <h2>Trusted by Auckland Builders and Project Managers</h2>
+      <div class="rule rule--center"></div>
+    </div>
+
+    <div class="tstm__stage" id="tstmStage">
+      <div class="slide is-active">
+        <div class="slide__stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="slide__quote">
+          "John and the AIW team were efficient, tidy and diligent on the project which we managed
+          at Rawene Rd, Birkenhead. Tanking to the block walls had to be applied in stages to meet a
+          tight deadline in order to achieve a successful handover. AIW was an integral part of the
+          project and we will continue to use and recommend them for our future projects."
+        </p>
+        <div class="slide__who">George Levick</div>
+        <div class="slide__role">Owner and Director, Priority One Construction</div>
+      </div>
+
+      <div class="slide">
+        <div class="slide__stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="slide__quote">
+          "John and his team have completed many different projects for us over the past five years.
+          They have always been on time, polite and great to work with, from tanking and under slab
+          through to decks and roof membranes. John is always happy to work in with us to meet tight
+          deadlines and the workmanship is always of a high quality."
+        </p>
+        <div class="slide__who">Brett Stuart</div>
+        <div class="slide__role">Project Manager, QPC Build Group</div>
+      </div>
+
+      <div class="slide">
+        <div class="slide__stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="slide__quote">
+          "We were extremely happy with all the work that was done and would highly recommend them.
+          The detailing was careful, the communication was clear and the site was left clean at the
+          end of every single day."
+        </p>
+        <div class="slide__who">Residential Client</div>
+        <div class="slide__role">New build, Remuera</div>
+      </div>
+    </div>
+
+    <div class="tstm__dots" id="tstmDots" role="tablist" aria-label="Testimonial navigation"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PARTNERS
+     ============================================================ -->
+<section class="section section--tight">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Trusted Partners</p>
+      <h2>An Approved Applicator of Major Membrane Systems</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">Approved applicator status means your manufacturer warranty is valid and the system is installed the way it was designed to be.</p>
+    </div>
+  </div>
+
+  <div class="marquee" data-reveal>
+    <div class="marquee__track">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Aroex-320x202.png" alt="Aroex" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Nuralite-2-320x202.png" alt="Nuralite" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Jaydex-320x202.png" alt="Jaydex" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Hitchins-320x202.png" alt="Hitchins" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Ramset-320x202.png" alt="Ramset" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Demden-320x202.png" alt="Demden" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/10/Viking_Roofspec_Logo-01.png" alt="Viking Roofspec" loading="lazy">
+      <!-- duplicate set keeps the marquee seamless -->
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Aroex-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Nuralite-2-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Jaydex-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Hitchins-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Ramset-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Demden-320x202.png" alt="" aria-hidden="true" loading="lazy">
+      <img src="https://aiw.co.nz/wp-content/uploads/2019/10/Viking_Roofspec_Logo-01.png" alt="" aria-hidden="true" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BAND
+     ============================================================ -->
+<section class="cta-band">
+  <div class="wrap cta-band__inner">
+    <div data-reveal="left">
+      <h2>Got a Project That Needs Waterproofing?</h2>
+      <p>Send us the plans or give us a call. We will tell you exactly what system it needs.</p>
+    </div>
+    <div class="cta-band__actions" data-reveal="right">
+      <a class="btn btn--accent btn--lg" href="#contact">Get a Free Quote <i class="fa-solid fa-arrow-right"></i></a>
+      <a class="btn btn--white btn--lg" href="tel:+6421928379"><i class="fa-solid fa-phone"></i> 021 WATER 9</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT: info + Google map + form (sits above the footer)
+     ============================================================ -->
+<section class="section section--surface" id="contact">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Contact Us Today</p>
+      <h2>Let's Keep the Water Where It Belongs</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">
+        Call the office, send through your plans or use the form. We cover the wider Auckland region
+        and we are happy to look at a job of any size.
+      </p>
+    </div>
+
+    <div class="contact__grid">
+      <!-- Contact info + map -->
+      <div data-reveal="left">
+        <ul class="info-list">
+          <li class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <h4>Call the Office</h4>
+              <a href="tel:+6421928379">021 WATER 9 / 021 928 379</a>
+            </div>
+          </li>
+          <li class="info-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <h4>Email Us</h4>
+              <a href="mailto:admin@aiw.co.nz">admin@aiw.co.nz</a>
+            </div>
+          </li>
+          <li class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <h4>Office Location</h4>
+              <p>Remuera, Auckland, New Zealand</p>
+            </div>
+          </li>
+          <li class="info-item">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+              <h4>Office Hours</h4>
+              <p>Monday to Friday, 9:00 AM to 5:00 PM</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="map-frame">
+          <iframe
+            title="Auckland Integrity Waterproofing office location in Remuera, Auckland"
+            src="https://www.google.com/maps?q=Remuera%2C%20Auckland%2C%20New%20Zealand&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- Contact form -->
+      <div class="contact-card" data-reveal="right">
+        <h3>Request Your Free Quote</h3>
+        <p class="contact-card__sub">Tell us about the project and our estimating team will be in touch, usually within one working day.</p>
+
+        <form action="#" method="post" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="c-name">Full name</label>
+              <input type="text" id="c-name" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="field">
+              <label for="c-phone">Phone</label>
+              <input type="tel" id="c-phone" name="phone" placeholder="021 123 4567" required>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="c-email">Email address</label>
+              <input type="email" id="c-email" name="email" placeholder="you@company.co.nz" required>
+            </div>
+            <div class="field">
+              <label for="c-suburb">Suburb</label>
+              <input type="text" id="c-suburb" name="suburb" placeholder="Takapuna">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="c-service">Service required</label>
+              <select id="c-service" name="service">
+                <option value="">Please select a service</option>
+                <option>Flat roof membrane</option>
+                <option>Deck or balcony</option>
+                <option>Below ground tanking</option>
+                <option>Torch on membrane</option>
+                <option>TPO single ply</option>
+                <option>Liquid membrane or remedial</option>
+                <option>Green roof system</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="c-type">Project type</label>
+              <select id="c-type" name="type">
+                <option value="">Please select a type</option>
+                <option>New residential build</option>
+                <option>Residential renovation</option>
+                <option>Commercial new build</option>
+                <option>Commercial remedial</option>
+                <option>Body corporate</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="c-msg">How can we help</label>
+            <textarea id="c-msg" name="message" placeholder="Site address, approximate area, timeframe and anything else we should know"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Send My Enquiry <i class="fa-solid fa-arrow-right"></i></button>
+
+          <p class="form-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            This form is protected by reCAPTCHA. Your details are used only to prepare your quote.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER  (global in WordPress, included here for preview)
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap footer__grid">
+    <div>
+      <img class="footer__logo" src="https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png" alt="Auckland Integrity Waterproofing">
+      <p>
+        Auckland Integrity Waterproofing is one of Auckland's largest waterproofing application
+        companies. We are Licensed Building Practitioners with over twenty years of construction
+        waterproofing experience within the industry.
+      </p>
+      <div class="footer__social">
+        <a href="mailto:admin@aiw.co.nz" aria-label="Email us"><i class="fa-solid fa-envelope"></i></a>
+        <a href="tel:+6421928379" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
+        <a href="#top" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#top" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="footer__title">Quick Links</h4>
+      <ul class="footer__links">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Recent Work</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="footer__title">Our Services</h4>
+      <ul class="footer__links">
+        <li><a href="#services">Flat Roof Membranes</a></li>
+        <li><a href="#services">Green Roof Systems</a></li>
+        <li><a href="#services">Below Ground Tanking</a></li>
+        <li><a href="#services">Torch On Membranes</a></li>
+        <li><a href="#services">TPO Single Ply</a></li>
+        <li><a href="#services">Liquid Membranes</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="footer__title">Contact Us Today</h4>
+      <ul class="footer__contact">
+        <li>
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Office Location<br>Remuera, Auckland<br>New Zealand</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-phone"></i>
+          <a href="tel:+6421928379">021 WATER 9 / 021 928 379</a>
+        </li>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:admin@aiw.co.nz">admin@aiw.co.nz</a>
+        </li>
+        <li>
+          <i class="fa-regular fa-clock"></i>
+          <span>Monday to Friday<br>9:00 AM to 5:00 PM</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="footer__bar">
+      <span>Copyright 2026 Auckland Integrity Waterproofing. All rights reserved.</span>
+      <nav aria-label="Footer links">
+        <a href="#top">Privacy Policy</a>
+        <a href="#top">Terms of Service</a>
+        <a href="#contact">Get a Quote</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     FLOATING UI
+     ============================================================ -->
+
+<!-- Mobile only call now button, bottom centre -->
+<a class="call-now" id="callNow" href="tel:+6421928379">
+  <i class="fa-solid fa-phone"></i> Call Now
+</a>
+
+<!-- Scroll to top, positioned above the reCAPTCHA badge -->
+<button class="to-top" id="toTop" aria-label="Scroll back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!--
+  Spacing guide marking where the reCAPTCHA badge renders in production, so you can
+  see that the scroll to top button above clears it. This is not the badge itself.
+  Delete this element when the page is built in WordPress.
+-->
+<div class="recaptcha-slot" aria-hidden="true">reCAPTCHA area reserved</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------------------------------------------------
+     Sticky header state
+     --------------------------------------------------------- */
+  var header = document.getElementById('siteHeader');
+
+  /* ---------------------------------------------------------
+     Mobile drawer
+     --------------------------------------------------------- */
+  var burger = document.getElementById('burger');
+  var drawer = document.getElementById('drawer');
+  var drawerClose = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    drawer.classList.add('is-open');
+    burger.classList.add('is-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    burger.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burger.addEventListener('click', function () {
+    if (drawer.classList.contains('is-open')) { closeDrawer(); } else { openDrawer(); }
+  });
+  drawerClose.addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', function (e) {
+    if (e.target === drawer) { closeDrawer(); }
+  });
+  drawer.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', closeDrawer);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) { closeDrawer(); }
+  });
+
+  /* ---------------------------------------------------------
+     Scroll reveal
+     --------------------------------------------------------- */
+  var revealItems = document.querySelectorAll('[data-reveal]');
+
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(function (el) { el.classList.add('is-in'); });
+  } else {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        var el = entry.target;
+        var siblings = Array.prototype.slice.call(
+          el.parentNode.querySelectorAll(':scope > [data-reveal]')
+        );
+        var index = siblings.indexOf(el);
+        el.style.transitionDelay = (index > 0 ? Math.min(index, 6) * 90 : 0) + 'ms';
+        el.classList.add('is-in');
+        revealObserver.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* ---------------------------------------------------------
+     Animated counters
+     --------------------------------------------------------- */
+  var counters = document.querySelectorAll('.counter');
+
+  function runCounter(el) {
+    var target = parseInt(el.getAttribute('data-to'), 10) || 0;
+    if (reduceMotion) { el.textContent = target; return; }
+
+    var duration = 1700;
+    var start = null;
+
+    function frame(now) {
+      if (start === null) { start = now; }
+      var progress = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) { requestAnimationFrame(frame); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var counterObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { counterObserver.observe(el); });
+  } else {
+    counters.forEach(runCounter);
+  }
+
+  /* ---------------------------------------------------------
+     Testimonial slider
+     --------------------------------------------------------- */
+  var slides = document.querySelectorAll('#tstmStage .slide');
+  var dotsWrap = document.getElementById('tstmDots');
+  var current = 0;
+  var timer = null;
+
+  if (slides.length && dotsWrap) {
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Show testimonial ' + (i + 1));
+      if (i === 0) { dot.classList.add('is-active'); }
+      dot.addEventListener('click', function () { goTo(i); restart(); });
+      dotsWrap.appendChild(dot);
+    });
+
+    var dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(index) {
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+    }
+    function restart() {
+      if (timer) { clearInterval(timer); }
+      if (!reduceMotion) { timer = setInterval(function () { goTo(current + 1); }, 7000); }
+    }
+    restart();
+
+    var stage = document.getElementById('tstmStage');
+    stage.addEventListener('mouseenter', function () { if (timer) { clearInterval(timer); } });
+    stage.addEventListener('mouseleave', restart);
+  }
+
+  /* ---------------------------------------------------------
+     Parallax backgrounds, header state, floating buttons
+     All driven from one throttled scroll handler
+     --------------------------------------------------------- */
+  var parallaxLayers = document.querySelectorAll('[data-parallax]');
+  var toTop = document.getElementById('toTop');
+  var callNow = document.getElementById('callNow');
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.pageYOffset;
+
+    /* Header shrink */
+    if (y > 40) { header.classList.add('is-stuck'); }
+    else { header.classList.remove('is-stuck'); }
+
+    /* Floating buttons appear after the hero */
+    if (y > 420) {
+      toTop.classList.add('is-visible');
+      callNow.classList.add('is-visible');
+    } else {
+      toTop.classList.remove('is-visible');
+      callNow.classList.remove('is-visible');
+    }
+
+    /* Parallax, only where the layer is on screen */
+    if (!reduceMotion) {
+      parallaxLayers.forEach(function (layer) {
+        var host = layer.parentNode;
+        var rect = host.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) { return; }
+        var speed = parseFloat(layer.getAttribute('data-parallax')) || 0.12;
+        layer.style.transform = 'translate3d(0,' + (-rect.top * speed) + 'px,0)';
+      });
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  /* ---------------------------------------------------------
+     Scroll to top
+     --------------------------------------------------------- */
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ---------------------------------------------------------
+     Active nav link tracking
+     --------------------------------------------------------- */
+  var sections = ['about', 'services', 'work', 'contact'];
+
+  if ('IntersectionObserver' in window) {
+    var navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) { return; }
+        document.querySelectorAll('.nav__link').forEach(function (link) {
+          link.classList.toggle(
+            'is-active',
+            link.getAttribute('href') === '#' + entry.target.id
+          );
+        });
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) { navObserver.observe(el); }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Demo form handling, replace with Contact Form 7 in WordPress
+     --------------------------------------------------------- */
+  document.querySelectorAll('form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var button = form.querySelector('button[type="submit"]');
+      if (!button) { return; }
+      var original = button.innerHTML;
+      button.innerHTML = '<i class="fa-solid fa-check"></i> Thank You, We Will Be In Touch';
+      setTimeout(function () { button.innerHTML = original; }, 3200);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
