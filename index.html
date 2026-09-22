@@ -3,8 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Auckland Integrity Waterproofing | Waterproofing That Works</title>
-<meta name="description" content="Auckland Integrity Waterproofing installs certified waterproofing membranes, tanking and torch-on systems for residential and commercial builds across Auckland. Free site assessment and quote.">
+<title>Auckland Waterproofing Specialists | Membranes, Tanking and Water Stop | AIW</title>
+<meta name="description" content="Auckland waterproofing specialists installing certified membranes, below ground tanking, torch on systems and water stop joint systems for residential and commercial builds. Free site assessment and quote across Auckland.">
+<link rel="canonical" href="https://aiw.co.nz/">
+
+<meta property="og:locale" content="en_NZ">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Auckland Integrity Waterproofing">
+<meta property="og:title" content="Auckland Waterproofing Specialists | Membranes, Tanking and Water Stop">
+<meta property="og:description" content="Auckland waterproofing specialists installing certified membranes, below ground tanking, torch on systems and water stop joint systems for residential and commercial builds.">
+<meta property="og:url" content="https://aiw.co.nz/">
+<meta property="og:image" content="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-120bk.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="https://aiw.co.nz/wp-content/uploads/2019/04/AIW-Logo-16px.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +63,7 @@
   --shadow-lg:   0 40px 80px -30px rgba(6,42,62,.42);
   --ease:        cubic-bezier(.22,.8,.3,1);
 
-  --header-h:    94px;
+  --header-h:    126px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -139,7 +149,7 @@ p:last-child{margin-bottom:0}
   content:"";width:26px;height:3px;border-radius:2px;
   background:var(--yellow);flex:none;
 }
-.eyebrow--light{color:var(--yellow)}
+.eyebrow--light{color:var(--yellow);text-shadow:0 1px 10px rgba(3,20,31,.6)}
 .eyebrow--center{justify-content:center}
 
 .section-head{margin-bottom:clamp(40px,4vw,64px)}
@@ -236,18 +246,18 @@ p:last-child{margin-bottom:0}
   gap:28px;min-height:var(--header-h);
   transition:min-height .35s var(--ease);
 }
-.site-header.is-stuck .header__inner{min-height:74px}
+.site-header.is-stuck .header__inner{min-height:96px}
 
 .brand{display:flex;align-items:center;flex:none;min-width:0}
 .brand img{
-  width:auto;height:70px;
-  max-width:190px;object-fit:contain;
+  width:auto;height:105px;
+  max-width:200px;object-fit:contain;
   transition:height .35s var(--ease);
 }
 @media (max-width:480px){
-  .brand img{height:58px;max-width:132px}
+  .brand img{height:87px;max-width:150px}
 }
-.site-header.is-stuck .brand img{height:54px}
+.site-header.is-stuck .brand img{height:81px}
 
 .nav{display:flex;align-items:center;gap:6px}
 .nav__link{
@@ -357,7 +367,7 @@ p:last-child{margin-bottom:0}
 }
 .drawer.is-open .drawer__panel{transform:translateX(0)}
 .drawer__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.drawer__head img{height:58px;width:auto;max-width:150px;object-fit:contain}
+.drawer__head img{height:87px;width:auto;max-width:150px;object-fit:contain}
 .drawer__close{
   width:44px;height:44px;border-radius:12px;
   background:var(--surface);color:var(--navy);font-size:1.1rem;
@@ -400,15 +410,20 @@ p:last-child{margin-bottom:0}
   isolation:isolate;
 }
 .hero__bg{
-  position:absolute;inset:-6% 0 0;
+  /* Layer is 150% of the hero in both axes, so a cover background renders the
+     photograph 50 percent larger than the section it sits behind */
+  position:absolute;
+  top:-25%;left:-25%;width:150%;height:150%;
   background:url("https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-120bk.jpg") center/cover no-repeat;
   z-index:-3;
   will-change:transform;
 }
 .hero__veil{
   position:absolute;inset:0;z-index:-2;
+  /* Lighter than a flat scrim so the banner photograph stays visible.
+     Kept heaviest on the left where the headline sits. */
   background:
-    linear-gradient(103deg, rgba(4,26,39,.95) 0%, rgba(5,33,49,.9) 42%, rgba(6,42,62,.66) 72%, rgba(6,42,62,.5) 100%);
+    linear-gradient(103deg, rgba(4,26,39,.72) 0%, rgba(5,33,49,.52) 36%, rgba(6,42,62,.26) 66%, rgba(6,42,62,.12) 100%);
 }
 .hero__glow{
   position:absolute;z-index:-1;pointer-events:none;
@@ -438,7 +453,7 @@ p:last-child{margin-bottom:0}
 }
 
 .hero__content{color:rgba(255,255,255,.82);max-width:720px;min-width:0}
-.hero h1{color:#fff;margin-bottom:22px}
+.hero h1{color:#fff;margin-bottom:22px;text-shadow:0 2px 18px rgba(3,20,31,.55)}
 .hero h1 .hl{
   color:var(--yellow);
   position:relative;display:inline-block;
@@ -452,7 +467,10 @@ p:last-child{margin-bottom:0}
 }
 @keyframes swipe{to{transform:scaleX(1)}}
 
-.hero__text{font-size:1.14rem;color:rgba(255,255,255,.8);margin-bottom:30px}
+.hero__text{
+  font-size:1.14rem;color:rgba(255,255,255,.88);margin-bottom:30px;
+  text-shadow:0 1px 12px rgba(3,20,31,.6);
+}
 
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:38px}
 
@@ -463,7 +481,8 @@ p:last-child{margin-bottom:0}
 }
 .hero__proof li{
   display:flex;align-items:center;gap:11px;
-  font-size:.92rem;font-weight:600;color:rgba(255,255,255,.86);
+  font-size:.92rem;font-weight:600;color:#fff;
+  text-shadow:0 1px 10px rgba(3,20,31,.65);
 }
 .hero__proof i{
   width:32px;height:32px;border-radius:50%;
@@ -559,37 +578,50 @@ p:last-child{margin-bottom:0}
    ============================================================ */
 .services__grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  /* Six tracks with each card spanning two gives three per row, and lets a
+     lone card on the final row be centred rather than left hanging */
+  grid-template-columns:repeat(6,1fr);
   gap:26px;
 }
-@media (max-width:1024px){.services__grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.services__grid{grid-template-columns:1fr}}
+.services__grid > *{grid-column:span 2}
+.services__grid > *:nth-child(7):last-child{grid-column:3 / span 2}
+@media (max-width:1024px){
+  .services__grid{grid-template-columns:repeat(4,1fr)}
+  .services__grid > *:nth-child(7):last-child{grid-column:2 / span 2}
+}
+@media (max-width:640px){
+  .services__grid{grid-template-columns:1fr}
+  .services__grid > *,
+  .services__grid > *:nth-child(7):last-child{grid-column:1 / -1}
+}
 .s-card{
   position:relative;display:flex;flex-direction:column;
-  background:#fff;
-  border:1px solid var(--line);
+  /* Resting state carries the brand cyan, hover reveals the white face */
+  background:linear-gradient(158deg,var(--blue) 0%, var(--blue-700) 100%);
+  border:1px solid var(--blue-600);
   border-radius:var(--radius);
   padding:36px 32px 34px;
   overflow:hidden;
   isolation:isolate;
-  color:var(--ink-700);
+  color:rgba(255,255,255,.9);
+  box-shadow:0 14px 30px -20px rgba(11,120,166,.75);
   transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s;
 }
 .s-card::before{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(160deg,var(--navy) 0%, #0B3D58 100%);
+  background:#fff;
   opacity:0;transition:opacity .45s var(--ease);
 }
 .s-card::after{
   content:"";position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,var(--blue),var(--yellow));
+  background:linear-gradient(90deg,var(--yellow),var(--blue));
   transform:scaleX(0);transform-origin:left;
   transition:transform .5s var(--ease);
 }
 .s-card:hover,.s-card:focus-visible{
   transform:translateY(-10px);
   box-shadow:var(--shadow-lg);
-  border-color:transparent;
+  border-color:var(--blue-100);
   outline:none;
 }
 .s-card:hover::before,.s-card:focus-visible::before{opacity:1}
@@ -598,23 +630,26 @@ p:last-child{margin-bottom:0}
 .s-card__icon{
   width:66px;height:66px;border-radius:16px;
   display:inline-flex;align-items:center;justify-content:center;
-  background:var(--blue-050);color:var(--blue-700);
+  background:var(--yellow);color:var(--navy);
   font-size:1.5rem;margin-bottom:22px;
   transition:background-color .45s var(--ease), color .45s var(--ease), transform .45s var(--ease);
 }
-.s-card:hover .s-card__icon{background:var(--yellow);color:var(--navy);transform:rotate(-6deg) scale(1.06)}
-.s-card h3{margin-bottom:12px;transition:color .45s}
-.s-card p{font-size:.97rem;margin-bottom:22px;transition:color .45s}
+.s-card h3{margin-bottom:12px;color:#fff;transition:color .45s}
+.s-card p{font-size:.97rem;margin-bottom:22px;color:rgba(255,255,255,.9);transition:color .45s}
 .s-card__more{
   margin-top:auto;
   display:inline-flex;align-items:center;gap:10px;
   font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--blue-700);
+  color:var(--yellow);
   transition:color .45s, gap .3s;
 }
-.s-card:hover h3{color:#fff}
-.s-card:hover p{color:rgba(255,255,255,.76)}
-.s-card:hover .s-card__more{color:var(--yellow);gap:16px}
+/* Hover reveals the light face, accents shift to cyan and navy */
+.s-card:hover .s-card__icon,.s-card:focus-visible .s-card__icon{
+  background:var(--blue);color:#fff;transform:rotate(-6deg) scale(1.06);
+}
+.s-card:hover h3,.s-card:focus-visible h3{color:var(--navy)}
+.s-card:hover p,.s-card:focus-visible p{color:var(--ink-700)}
+.s-card:hover .s-card__more,.s-card:focus-visible .s-card__more{color:var(--blue-700);gap:16px}
 
 /* ============================================================
    SPLIT / ABOUT
@@ -675,6 +710,37 @@ p:last-child{margin-bottom:0}
   display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;
 }
 .check-list strong{color:var(--navy);font-weight:700}
+
+/* ============================================================
+   SEO CONTENT BLOCK
+   ============================================================ */
+.seo-block{background:var(--surface)}
+.seo-block__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  gap:clamp(32px,4vw,64px);
+  align-items:start;
+}
+.seo-block__grid > *{min-width:0}
+@media (max-width:980px){.seo-block__grid{grid-template-columns:1fr}}
+.seo-block p{font-size:1.02rem}
+.seo-block__aside{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px 30px;
+  box-shadow:var(--shadow-sm);
+}
+.seo-block__aside h3{font-size:1.24rem;margin-bottom:20px}
+.seo-list{display:grid;gap:12px;margin-bottom:26px}
+.seo-list li{display:flex;align-items:flex-start;gap:12px;font-size:.96rem}
+.seo-list i{
+  width:22px;height:22px;border-radius:50%;flex:none;margin-top:4px;
+  background:var(--blue);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;
+}
+.seo-list a{font-weight:600;color:var(--ink-700);transition:color .25s}
+.seo-list a:hover{color:var(--blue-700)}
 
 /* ============================================================
    STATS
@@ -847,13 +913,21 @@ p:last-child{margin-bottom:0}
 /* ============================================================
    TESTIMONIALS
    ============================================================ */
-.tstm{position:relative;overflow:hidden;background:var(--navy)}
+.tstm{
+  position:relative;overflow:hidden;
+  background:linear-gradient(170deg,var(--blue-050) 0%, #DCF1FB 60%, var(--blue-100) 100%);
+}
 .tstm__bg{
-  position:absolute;inset:0;
-  background:url("https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-113BK-1024x683.jpg") center/cover no-repeat;
-  opacity:.14;
+  position:absolute;inset:0;pointer-events:none;
+  /* Cyan and white highlights only. A yellow glow here turns the blue
+     panel a muddy green where the two overlap. */
+  background:
+    radial-gradient(circle at 16% 20%, rgba(255,255,255,.75) 0%, rgba(255,255,255,0) 58%),
+    radial-gradient(circle at 84% 80%, rgba(27,169,226,.2) 0%, rgba(27,169,226,0) 58%);
 }
 .tstm__inner{position:relative}
+.tstm h2{color:var(--navy)}
+.tstm .eyebrow--light{color:var(--blue-700);text-shadow:none}
 .tstm__stage{position:relative;min-height:260px}
 .slide{
   position:absolute;inset:0;
@@ -867,24 +941,24 @@ p:last-child{margin-bottom:0}
   font-family:'Manrope',sans-serif;
   font-size:clamp(1.05rem,1.55vw,1.4rem);
   line-height:1.72;
-  color:#fff;
+  color:var(--navy);
   font-weight:500;
   margin-bottom:26px;
 }
-.slide__stars{color:var(--yellow);font-size:1rem;letter-spacing:.24em;margin-bottom:22px}
+.slide__stars{color:var(--blue);font-size:1rem;letter-spacing:.24em;margin-bottom:22px}
 .slide__who{
   font-family:'Barlow Condensed',sans-serif;
   font-size:1.25rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--yellow);
+  color:var(--blue-700);
 }
-.slide__role{font-size:.86rem;color:rgba(255,255,255,.62);letter-spacing:.05em}
+.slide__role{font-size:.86rem;color:var(--ink-500);letter-spacing:.05em}
 .tstm__dots{display:flex;justify-content:center;gap:10px;margin-top:34px}
 .tstm__dots button{
   width:11px;height:11px;border-radius:50%;
-  background:#124B6B;
+  background:#A9D6EC;
   transition:background-color .3s, width .3s var(--ease);
 }
-.tstm__dots button.is-active{background:var(--yellow);width:32px;border-radius:6px}
+.tstm__dots button.is-active{background:var(--blue-700);width:32px;border-radius:6px}
 
 /* ============================================================
    PARTNERS MARQUEE
@@ -999,7 +1073,7 @@ p:last-child{margin-bottom:0}
 @media (max-width:980px){.footer__grid{grid-template-columns:1fr 1fr;gap:34px}}
 @media (max-width:560px){.footer__grid{grid-template-columns:1fr}}
 
-.footer__logo{height:96px;width:auto;max-width:210px;object-fit:contain;margin-bottom:22px}
+.footer__logo{height:144px;width:auto;max-width:230px;object-fit:contain;margin-bottom:22px}
 .site-footer p{font-size:.95rem;line-height:1.75}
 .footer__title{
   font-family:'Barlow Condensed',sans-serif;
@@ -1193,6 +1267,7 @@ p:last-child{margin-bottom:0}
           <a href="#services">Torch On Membranes</a>
           <a href="#services">TPO Single Ply</a>
           <a href="#services">Liquid Membranes</a>
+          <a href="#services">Water Stop Systems</a>
         </div>
       </div>
       <div class="has-drop">
@@ -1237,6 +1312,7 @@ p:last-child{margin-bottom:0}
       <a href="#services">Torch On Membranes</a>
       <a href="#services">TPO Single Ply</a>
       <a href="#services">Liquid Membranes</a>
+      <a href="#services">Water Stop Systems</a>
     </div>
     <a class="drawer__link" href="#work">Recent Work</a>
     <a class="drawer__link" href="#contact">Contact</a>
@@ -1268,11 +1344,12 @@ p:last-child{margin-bottom:0}
   <div class="wrap hero__grid">
     <div class="hero__content">
       <p class="eyebrow eyebrow--light" data-reveal>Auckland Waterproofing Specialists Since 2012</p>
-      <h1 data-reveal>Waterproofing <span class="hl">That Works</span>, First Time and Every Time</h1>
+      <h1 data-reveal>Auckland Waterproofing <span class="hl">That Works</span>, First Time and Every Time</h1>
       <p class="hero__text" data-reveal>
-        We install certified membrane, tanking and torch on systems for residential and
-        commercial builds across Auckland. Warranted workmanship, clean sites and detailing
-        that holds up to a Tamaki Makaurau winter.
+        Auckland waterproofing specialists installing certified membranes, below ground
+        tanking, torch on systems and water stop joints for residential and commercial
+        builds. Warranted workmanship, clean sites and detailing that holds up to a
+        Tamaki Makaurau winter.
       </p>
 
       <div class="hero__actions" data-reveal>
@@ -1357,12 +1434,13 @@ p:last-child{margin-bottom:0}
 <section class="section services" id="services">
   <div class="wrap">
     <div class="section-head section-head--center" data-reveal>
-      <p class="eyebrow eyebrow--center">Specialists in Waterproofing Membranes</p>
+      <p class="eyebrow eyebrow--center">Auckland Waterproofing Services</p>
       <h2>Systems Built for the Way Auckland Weather Behaves</h2>
       <div class="rule rule--center"></div>
       <p class="lead">
-        New builds, renovations and remedial work. We match the membrane to the substrate,
-        the detail and the design life, then install it to the manufacturer specification.
+        New builds, renovations and remedial work. We match the membrane, tanking or water
+        stop system to the substrate, the detail and the design life, then install it to the
+        manufacturer specification.
       </p>
     </div>
 
@@ -1384,7 +1462,7 @@ p:last-child{margin-bottom:0}
       <a class="s-card" href="#contact" data-reveal>
         <span class="s-card__icon"><i class="fa-solid fa-layer-group"></i></span>
         <h3>Below Ground Tanking</h3>
-        <p>Tanking has to be right the first time because there is no second chance once the backfill goes in. It is an integral part of the foundation.</p>
+        <p>Tanking has to be right the first time because there is no second chance once the backfill goes in. It is an integral part of the foundation, and we detail every construction joint with the matching water stop.</p>
         <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
@@ -1408,6 +1486,64 @@ p:last-child{margin-bottom:0}
         <p>Seamless coatings for remedial and maintenance work, applied over timber, concrete and a range of existing substrates with tricky detailing.</p>
         <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
       </a>
+
+      <a class="s-card" href="#contact" data-reveal>
+        <span class="s-card__icon"><i class="fa-solid fa-grip-lines"></i></span>
+        <h3>Water Stop Systems</h3>
+        <p>Water stop is the seal inside the concrete itself. We install PVC and hydrophilic waterstop to construction and expansion joints, slab to wall junctions and pour breaks, so water cannot track through the joint later.</p>
+        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEO CONTENT: Auckland waterproofing and water stop
+     ============================================================ -->
+<section class="section section--tight seo-block" id="auckland-waterproofing">
+  <div class="wrap">
+    <div class="seo-block__grid">
+      <div data-reveal="left">
+        <p class="eyebrow">Auckland Waterproofing and Water Stop</p>
+        <h2>Auckland Waterproofing Specialists for Membranes, Tanking and Water Stop</h2>
+        <div class="rule"></div>
+        <p>
+          Auckland Integrity Waterproofing has been doing waterproofing in Auckland since
+          2012, on new builds, renovations and remedial work. We install certified membrane
+          systems to flat roofs, decks, balconies, planter boxes and basements, and we carry
+          approved applicator status with the major New Zealand suppliers so the manufacturer
+          warranty behind your Auckland waterproofing stands up.
+        </p>
+        <p>
+          Water stop is the part most people never see. A waterstop is the seal cast inside
+          the concrete at a construction joint, an expansion joint or a slab to wall junction,
+          and it is what stops water tracking through the joint once the building is finished.
+          We install both PVC and hydrophilic water stop alongside our tanking packages, and
+          we detail the two together so the membrane and the joint seal work as one system
+          rather than two separate trades.
+        </p>
+        <p>
+          We cover the wider Auckland region, from the North Shore and Takapuna through the
+          central suburbs, Remuera and the eastern bays, out to West Auckland and south to
+          Manukau. If you are weighing up which waterproofing system an Auckland project needs,
+          send us the plans and we will tell you what we would specify and why.
+        </p>
+      </div>
+
+      <aside class="seo-block__aside" data-reveal="right">
+        <h3>Waterproofing We Install Across Auckland</h3>
+        <ul class="seo-list">
+          <li><i class="fa-solid fa-check"></i><a href="#services">Flat roof and deck membranes</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">Below ground tanking</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">PVC and hydrophilic water stop</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">Torch on membrane systems</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">TPO single ply roofing</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">Liquid applied membranes</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#services">Green roof and planter waterproofing</a></li>
+          <li><i class="fa-solid fa-check"></i><a href="#work">Remedial and leak repair work</a></li>
+        </ul>
+        <a class="btn btn--primary btn--block" href="#contact">Get an Auckland Waterproofing Quote</a>
+      </aside>
     </div>
   </div>
 </section>
@@ -1420,11 +1556,11 @@ p:last-child{margin-bottom:0}
     <div class="media-stack" data-reveal="left">
       <div class="media-stack__main">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-122-460x295.jpg"
-             alt="Waterproofing membrane being installed on an Auckland build" loading="lazy">
+             alt="Auckland waterproofing membrane being installed on a new build" loading="lazy">
       </div>
       <div class="media-stack__sub">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
-             alt="Detailing work on a commercial waterproofing project" loading="lazy">
+             alt="Water stop and membrane detailing on a commercial Auckland waterproofing project" loading="lazy">
       </div>
       <div class="media-stack__badge">
         <strong>20+</strong>
@@ -1509,7 +1645,7 @@ p:last-child{margin-bottom:0}
     <div class="work__grid">
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2017/02/Auckland-Waterproofing-Membrane-Tanking-134-460x295.jpg"
-             alt="Residential membrane roof project in Auckland" loading="lazy">
+             alt="Residential Auckland waterproofing membrane roof project" loading="lazy">
         <div class="work-card__body">
           <span class="work-card__tag">Residential</span>
           <h3>Life Church Auckland</h3>
@@ -1519,7 +1655,7 @@ p:last-child{margin-bottom:0}
 
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-122-460x295.jpg"
-             alt="Commercial tanking project in Auckland" loading="lazy">
+             alt="Commercial below ground tanking and water stop project in Auckland" loading="lazy">
         <div class="work-card__body">
           <span class="work-card__tag">Commercial</span>
           <h3>Nutritech International</h3>
@@ -1529,7 +1665,7 @@ p:last-child{margin-bottom:0}
 
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
-             alt="Deck and balcony waterproofing in Takapuna" loading="lazy">
+             alt="Deck and balcony Auckland waterproofing in Takapuna" loading="lazy">
         <div class="work-card__body">
           <span class="work-card__tag">New Build</span>
           <h3>Park Ave, Takapuna</h3>
@@ -1871,8 +2007,9 @@ p:last-child{margin-bottom:0}
       <img class="footer__logo" src="https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png" alt="Auckland Integrity Waterproofing">
       <p>
         Auckland Integrity Waterproofing is one of Auckland's largest waterproofing application
-        companies. We are Licensed Building Practitioners with over twenty years of construction
-        waterproofing experience within the industry.
+        companies, installing membranes, below ground tanking and water stop systems. We are
+        Licensed Building Practitioners with over twenty years of construction waterproofing
+        experience within the industry.
       </p>
       <div class="footer__social">
         <a href="mailto:admin@aiw.co.nz" aria-label="Email us"><i class="fa-solid fa-envelope"></i></a>
@@ -1902,6 +2039,7 @@ p:last-child{margin-bottom:0}
         <li><a href="#services">Torch On Membranes</a></li>
         <li><a href="#services">TPO Single Ply</a></li>
         <li><a href="#services">Liquid Membranes</a></li>
+        <li><a href="#services">Water Stop Systems</a></li>
       </ul>
     </div>
 
@@ -1960,6 +2098,78 @@ p:last-child{margin-bottom:0}
   Delete this element when the page is built in WordPress.
 -->
 <div class="recaptcha-slot" aria-hidden="true">reCAPTCHA area reserved</div>
+
+<!-- Structured data so search engines can read the business, its area
+     and the waterproofing services it offers -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "RoofingContractor"],
+      "@id": "https://aiw.co.nz/#business",
+      "name": "Auckland Integrity Waterproofing",
+      "description": "Auckland waterproofing specialists installing certified membranes, below ground tanking, torch on systems and water stop joint systems for residential and commercial builds.",
+      "url": "https://aiw.co.nz/",
+      "telephone": "+6421928379",
+      "email": "admin@aiw.co.nz",
+      "image": "https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png",
+      "logo": "https://aiw.co.nz/wp-content/uploads/2019/04/Johns-Logo-Final-01.png",
+      "foundingDate": "2012",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Remuera",
+        "addressRegion": "Auckland",
+        "addressCountry": "NZ"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Auckland" },
+        { "@type": "AdministrativeArea", "name": "North Shore" },
+        { "@type": "AdministrativeArea", "name": "West Auckland" },
+        { "@type": "AdministrativeArea", "name": "South Auckland" }
+      ],
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }],
+      "knowsAbout": [
+        "Auckland waterproofing",
+        "water stop",
+        "waterstop",
+        "waterproofing membranes",
+        "below ground tanking",
+        "torch on membrane",
+        "TPO single ply roofing",
+        "liquid applied membrane",
+        "green roof waterproofing"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Auckland Waterproofing Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Flat Roof Membranes", "description": "Waterproofing membranes for flat roofs, decks and balconies across Auckland." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Green Roof Systems", "description": "Root resistant waterproofing build ups for roof gardens and planters." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Below Ground Tanking", "description": "Below ground waterproofing and tanking to basements and foundations." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Torch On Membranes", "description": "Modified bitumen torch on membrane systems for roofs, decks and basements." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "TPO Single Ply", "description": "Heat welded thermoplastic polyolefin single ply roofing membranes." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Liquid Membranes", "description": "Seamless liquid applied membranes for remedial and maintenance waterproofing." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Water Stop Systems", "description": "PVC and hydrophilic water stop installed to construction joints, expansion joints and slab to wall junctions." } }
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://aiw.co.nz/#website",
+      "url": "https://aiw.co.nz/",
+      "name": "Auckland Integrity Waterproofing",
+      "publisher": { "@id": "https://aiw.co.nz/#business" },
+      "inLanguage": "en-NZ"
+    }
+  ]
+}
+</script>
 
 <script>
 (function () {
