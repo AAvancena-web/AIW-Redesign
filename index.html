@@ -844,7 +844,32 @@ p:last-child{margin-bottom:0}
 .seo-block__grid > *{min-width:0}
 @media (max-width:1024px){.seo-block__grid{grid-template-columns:1fr}}
 
+.seo-block__body{display:flex;flex-direction:column}
 .seo-block__body p{font-size:1.02rem}
+
+/* Any height left over after the copy is pushed below the chips, so the
+   column finishes level with the card instead of trailing off early */
+.seo-faq{margin-top:auto;padding-top:clamp(20px,2.4vw,34px)}
+.seo-faq .seo-block__sub{margin-top:0}
+.seo-faq__item{
+  padding:16px 20px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-left:4px solid var(--yellow);
+  border-radius:var(--radius-sm);
+  transition:border-left-color .3s, transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.seo-faq__item + .seo-faq__item{margin-top:12px}
+.seo-faq__item:hover{
+  border-left-color:var(--blue);
+  transform:translateX(4px);
+  box-shadow:var(--shadow-sm);
+}
+.seo-faq__item h4{
+  font-size:1rem;margin:0 0 6px;letter-spacing:.03em;
+  text-transform:none;
+}
+.seo-faq__item p{font-size:.95rem !important;margin:0;color:var(--ink-700)}
 .seo-block__intro{
   font-size:1.18rem !important;
   font-weight:600;
@@ -1248,12 +1273,17 @@ p:last-child{margin-bottom:0}
 }
 .marquee:hover .marquee__track{animation-play-state:paused}
 @keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Partner logos stay in their own brand colours */
 .marquee img{
   height:74px;width:auto;object-fit:contain;
-  filter:grayscale(1);opacity:.55;
-  transition:filter .35s, opacity .35s, transform .35s var(--ease);
+  opacity:.92;
+  transition:opacity .35s, transform .35s var(--ease), filter .35s;
 }
-.marquee img:hover{filter:grayscale(0);opacity:1;transform:scale(1.06)}
+.marquee img:hover{
+  opacity:1;
+  transform:scale(1.07);
+  filter:drop-shadow(0 8px 16px rgba(6,42,62,.18));
+}
 @media (prefers-reduced-motion:reduce){
   .marquee__track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}
 }
@@ -1833,6 +1863,24 @@ p:last-child{margin-bottom:0}
           <li>North Shore</li><li>Takapuna</li><li>Central Auckland</li><li>Remuera</li>
           <li>Eastern Bays</li><li>West Auckland</li><li>Manukau</li><li>Franklin</li>
         </ul>
+
+        <div class="seo-faq">
+          <h3 class="seo-block__sub">Commonly Asked</h3>
+          <div class="seo-faq__item">
+            <h4>Do you supply producer statements for council?</h4>
+            <p>
+              Yes. We issue a producer statement for the waterproofing on completion and
+              register the manufacturer warranty for the system we installed.
+            </p>
+          </div>
+          <div class="seo-faq__item">
+            <h4>Can you work to a staged build programme?</h4>
+            <p>
+              Yes. Tanking and water stop usually go in across several pours, so we stage our
+              crews around your programme and sign off each stage before the next trade starts.
+            </p>
+          </div>
+        </div>
       </div>
 
       <aside class="seo-card" data-reveal="right">
