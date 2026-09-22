@@ -70,6 +70,11 @@
 
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
 
+/* Anchor targets clear the sticky header rather than hiding beneath it */
+:target,
+section[id],
+#top{scroll-margin-top:calc(var(--header-h) + 18px)}
+
 body{
   margin:0;
   font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -77,7 +82,7 @@ body{
   line-height:1.72;
   color:var(--ink-700);
   background:var(--white);
-  overflow-x:hidden;
+  overflow-x:clip;
 }
 
 img{max-width:100%;display:block;height:auto}
@@ -165,7 +170,28 @@ p:last-child{margin-bottom:0}
   background:linear-gradient(90deg,var(--yellow),var(--blue));
   margin:0 0 26px;
 }
-.rule--center{margin-inline:auto}
+.rule--center{margin-inline:auto;position:relative}
+/* Diamond centre echoing the shape of the logo */
+.rule::after{
+  content:"";position:absolute;top:50%;left:50%;
+  width:11px;height:11px;border-radius:2px;
+  background:var(--navy);
+  transform:translate(-50%,-50%) rotate(45deg);
+  box-shadow:0 0 0 4px var(--white);
+}
+.section--navy .rule::after,.stats .rule::after{
+  background:#fff;box-shadow:0 0 0 4px var(--navy);
+}
+.section--surface .rule::after,.seo-block .rule::after{box-shadow:0 0 0 4px var(--surface)}
+.tstm .rule::after{box-shadow:0 0 0 4px #E4F3FB}
+.rule{position:relative}
+
+/* Headings wipe upward into view */
+.section-head h2{
+  clip-path:inset(0 0 105% 0);
+  transition:clip-path 1.05s var(--ease) .08s;
+}
+.section-head.is-in h2{clip-path:inset(0 0 -10% 0)}
 
 /* ---------- Buttons (solid fills only, no transparency) ---------- */
 .btn{
@@ -192,7 +218,11 @@ p:last-child{margin-bottom:0}
 .btn:hover i{transform:translateX(4px)}
 .btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
 
-.btn--primary{background:var(--blue);color:#fff;box-shadow:0 16px 30px -14px rgba(27,169,226,.85)}
+.btn--primary{
+  background:linear-gradient(135deg,var(--blue-700) 0%, #075E85 100%);
+  color:#fff;
+  box-shadow:0 16px 30px -14px rgba(11,120,166,.85);
+}
 .btn--primary::after{background:var(--navy)}
 .btn--primary:hover{box-shadow:0 22px 40px -16px rgba(6,42,62,.6)}
 
@@ -241,6 +271,12 @@ p:last-child{margin-bottom:0}
   transition:box-shadow .35s var(--ease), padding .35s var(--ease);
 }
 .site-header.is-stuck{box-shadow:0 12px 30px -18px rgba(6,42,62,.45)}
+.scroll-progress{
+  position:absolute;left:0;bottom:-1px;height:3px;width:0;
+  background:linear-gradient(90deg,var(--blue) 0%, var(--yellow) 100%);
+  z-index:5;border-radius:0 3px 3px 0;
+  transition:width .12s linear;
+}
 .header__inner{
   display:flex;align-items:center;justify-content:space-between;
   gap:28px;min-height:var(--header-h);
@@ -502,10 +538,10 @@ p:last-child{margin-bottom:0}
 }
 .hero-form__flag{
   position:absolute;top:-16px;right:26px;
-  background:var(--blue);color:#fff;
+  background:var(--navy);color:var(--yellow);
   font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
   padding:9px 16px;border-radius:8px;
-  box-shadow:0 12px 24px -12px rgba(27,169,226,.9);
+  box-shadow:0 12px 24px -12px rgba(6,42,62,.7);
 }
 .hero-form h2{
   font-size:clamp(1.65rem,2.1vw,2.05rem);
@@ -572,44 +608,43 @@ p:last-child{margin-bottom:0}
   color:var(--navy);
 }
 .trustbar__item i{font-size:1.3rem;color:var(--navy)}
+.trustbar__item:not(:last-child)::after{
+  content:"";width:8px;height:8px;border-radius:2px;
+  background:rgba(6,42,62,.3);
+  transform:rotate(45deg);
+  margin-left:34px;
+}
+@media (max-width:860px){.trustbar__item:not(:last-child)::after{display:none}}
 
 /* ============================================================
    SERVICES
    ============================================================ */
 .services__grid{
   display:grid;
-  /* Six tracks with each card spanning two gives three per row, and lets a
-     lone card on the final row be centred rather than left hanging */
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:26px;
 }
-.services__grid > *{grid-column:span 2}
-.services__grid > *:nth-child(7):last-child{grid-column:3 / span 2}
-@media (max-width:1024px){
-  .services__grid{grid-template-columns:repeat(4,1fr)}
-  .services__grid > *:nth-child(7):last-child{grid-column:2 / span 2}
-}
-@media (max-width:640px){
-  .services__grid{grid-template-columns:1fr}
-  .services__grid > *,
-  .services__grid > *:nth-child(7):last-child{grid-column:1 / -1}
-}
+@media (max-width:1024px){.services__grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.services__grid{grid-template-columns:1fr}}
 .s-card{
   position:relative;display:flex;flex-direction:column;
-  /* Resting state carries the brand cyan, hover reveals the white face */
-  background:linear-gradient(158deg,var(--blue) 0%, var(--blue-700) 100%);
-  border:1px solid var(--blue-600);
+  /* Resting state carries the deeper brand blue, hover reveals the white
+     face. Deeper than the logo cyan so white copy clears WCAG AA. */
+  background:linear-gradient(158deg,var(--blue-700) 0%, #064F6E 100%);
+  border:1px solid rgba(255,255,255,.14);
   border-radius:var(--radius);
   padding:36px 32px 34px;
   overflow:hidden;
   isolation:isolate;
-  color:rgba(255,255,255,.9);
-  box-shadow:0 14px 30px -20px rgba(11,120,166,.75);
+  color:#fff;
+  box-shadow:0 18px 34px -22px rgba(6,42,62,.8);
   transition:transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s;
 }
 .s-card::before{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:#fff;
+  background:
+    radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(27,169,226,.14) 0%, rgba(255,255,255,0) 62%),
+    #fff;
   opacity:0;transition:opacity .45s var(--ease);
 }
 .s-card::after{
@@ -635,14 +670,15 @@ p:last-child{margin-bottom:0}
   transition:background-color .45s var(--ease), color .45s var(--ease), transform .45s var(--ease);
 }
 .s-card h3{margin-bottom:12px;color:#fff;transition:color .45s}
-.s-card p{font-size:.97rem;margin-bottom:22px;color:rgba(255,255,255,.9);transition:color .45s}
+.s-card p{font-size:.97rem;margin-bottom:22px;color:rgba(255,255,255,.94);transition:color .45s}
 .s-card__more{
   margin-top:auto;
   display:inline-flex;align-items:center;gap:10px;
   font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--yellow);
+  color:#fff;
   transition:color .45s, gap .3s;
 }
+.s-card__more i{color:var(--yellow);transition:color .45s}
 /* Hover reveals the light face, accents shift to cyan and navy */
 .s-card:hover .s-card__icon,.s-card:focus-visible .s-card__icon{
   background:var(--blue);color:#fff;transform:rotate(-6deg) scale(1.06);
@@ -714,33 +750,148 @@ p:last-child{margin-bottom:0}
 /* ============================================================
    SEO CONTENT BLOCK
    ============================================================ */
-.seo-block{background:var(--surface)}
+.seo-block{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(900px 480px at 88% 6%, rgba(27,169,226,.09) 0%, rgba(27,169,226,0) 70%),
+    radial-gradient(700px 420px at 4% 94%, rgba(245,227,26,.1) 0%, rgba(245,227,26,0) 70%),
+    linear-gradient(180deg,#FBFDFE 0%, var(--surface) 100%);
+}
+/* Rotated squares echoing the diamond in the logo */
+.seo-block__diamond{
+  position:absolute;pointer-events:none;z-index:0;
+  border-radius:16px;transform:rotate(45deg);
+}
+.seo-block__diamond--a{
+  width:250px;height:250px;top:-90px;right:-70px;
+  border:1px solid rgba(27,169,226,.22);
+}
+.seo-block__diamond--b{
+  width:150px;height:150px;bottom:-50px;left:-40px;
+  border:1px solid rgba(245,227,26,.4);
+}
+.seo-block .wrap{position:relative;z-index:1}
+
 .seo-block__grid{
   display:grid;
-  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
-  gap:clamp(32px,4vw,64px);
+  grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
+  gap:clamp(32px,4vw,60px);
   align-items:start;
 }
 .seo-block__grid > *{min-width:0}
-@media (max-width:980px){.seo-block__grid{grid-template-columns:1fr}}
-.seo-block p{font-size:1.02rem}
-.seo-block__aside{
+@media (max-width:1024px){.seo-block__grid{grid-template-columns:1fr}}
+
+.seo-block__body p{font-size:1.02rem}
+.seo-block__intro{
+  font-size:1.18rem !important;
+  font-weight:600;
+  color:var(--navy);
+  padding-left:20px;
+  border-left:4px solid var(--yellow);
+}
+.seo-block__sub{
+  font-size:1.2rem;margin:34px 0 12px;
+  display:flex;align-items:center;gap:12px;
+}
+.seo-block__sub::after{
+  content:"";height:1px;flex:1;
+  background:linear-gradient(90deg,var(--blue-100),transparent);
+}
+
+/* Pull out definition for water stop */
+.seo-note{
+  position:relative;
+  margin:30px 0;
+  padding:30px 32px 26px;
   background:#fff;
-  border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:32px 30px;
+  border:1px solid var(--line);
+  border-left:5px solid var(--blue);
   box-shadow:var(--shadow-sm);
 }
-.seo-block__aside h3{font-size:1.24rem;margin-bottom:20px}
-.seo-list{display:grid;gap:12px;margin-bottom:26px}
-.seo-list li{display:flex;align-items:flex-start;gap:12px;font-size:.96rem}
+.seo-note > i{
+  position:absolute;top:18px;right:24px;
+  font-size:2rem;color:var(--blue-100);
+}
+.seo-note blockquote{
+  margin:0;padding-right:44px;
+  font-size:1.06rem;line-height:1.7;
+  color:var(--navy);font-weight:500;
+}
+.seo-note figcaption{
+  margin-top:14px;
+  font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-700);
+}
+
+/* Suburb chips */
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.chips li{
+  padding:8px 15px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:60px;
+  font-size:.82rem;font-weight:600;color:var(--ink-700);
+  transition:border-color .3s, color .3s, transform .3s var(--ease);
+}
+.chips li:hover{border-color:var(--blue);color:var(--blue-700);transform:translateY(-2px)}
+
+/* Feature card */
+.seo-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  position:sticky;top:calc(var(--header-h) + 24px);
+}
+@media (max-width:1024px){.seo-card{position:static}}
+.seo-card__media{position:relative;line-height:0}
+.seo-card__media img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.seo-card__media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(4,26,39,.7) 0%, rgba(4,26,39,0) 60%);
+}
+.seo-card__badge{
+  position:absolute;left:18px;bottom:16px;z-index:2;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 15px;border-radius:8px;
+  background:var(--yellow);color:var(--navy);
+  font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  line-height:1;
+}
+.seo-card__body{padding:30px 28px 28px}
+.seo-card__body h3{font-size:1.2rem;margin-bottom:20px}
+
+.seo-list{display:grid;gap:11px;margin-bottom:24px}
+.seo-list li{display:flex;align-items:flex-start;gap:12px;font-size:.95rem}
 .seo-list i{
   width:22px;height:22px;border-radius:50%;flex:none;margin-top:4px;
-  background:var(--blue);color:#fff;
-  display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;
+  background:var(--blue-050);color:var(--blue-700);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.58rem;
+  transition:background-color .3s, color .3s;
 }
+.seo-list li:hover i{background:var(--blue);color:#fff}
 .seo-list a{font-weight:600;color:var(--ink-700);transition:color .25s}
 .seo-list a:hover{color:var(--blue-700)}
+
+.seo-card__call{
+  display:flex;align-items:center;gap:14px;
+  margin-top:18px;padding-top:18px;
+  border-top:1px solid var(--line);
+  font-size:.92rem;color:var(--ink-700);
+}
+.seo-card__call strong{
+  display:block;color:var(--navy);font-size:.72rem;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;
+}
+.seo-card__call-icon{
+  width:42px;height:42px;border-radius:50%;flex:none;
+  background:var(--navy);color:var(--yellow);
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background-color .3s, transform .3s var(--ease);
+}
+.seo-card__call:hover .seo-card__call-icon{background:var(--blue-700);transform:scale(1.06)}
 
 /* ============================================================
    STATS
@@ -757,6 +908,8 @@ p:last-child{margin-bottom:0}
   opacity:.16;will-change:transform;
 }
 .stats__inner{position:relative}
+.stats h2{color:#fff}
+.stats .lead{color:rgba(255,255,255,.76)}
 .stats__grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -825,6 +978,15 @@ p:last-child{margin-bottom:0}
   transition:transform .45s var(--ease);
 }
 .work-card:hover .work-card__body{transform:translateY(0)}
+.work-card__go{
+  position:absolute;top:20px;right:20px;z-index:3;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--yellow);color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(-10px) scale(.85);
+  transition:opacity .4s var(--ease), transform .4s var(--ease);
+}
+.work-card:hover .work-card__go{opacity:1;transform:translateY(0) scale(1)}
 .work-card__tag{
   display:inline-block;
   background:var(--yellow);color:var(--navy);
@@ -859,13 +1021,33 @@ p:last-child{margin-bottom:0}
   overflow:hidden;
   transition:transform .4s var(--ease), box-shadow .4s var(--ease);
 }
-.value:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.value::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--blue),var(--yellow));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform .45s var(--ease);
+}
+.value:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--blue-100)}
+.value:hover::after{transform:scaleY(1)}
 .value__num{
-  position:absolute;top:14px;right:20px;
+  position:absolute;top:18px;right:22px;
   font-family:'Barlow Condensed',sans-serif;
-  font-size:3.6rem;font-weight:700;
-  color:var(--blue-050);
+  font-size:3.4rem;font-weight:700;
   line-height:1;
+  color:transparent;
+  -webkit-text-stroke:2px var(--blue);
+  opacity:.5;
+  transition:opacity .4s var(--ease), color .4s var(--ease), -webkit-text-stroke-color .4s var(--ease);
+}
+.value:hover .value__num{
+  opacity:1;
+  color:var(--blue);
+  -webkit-text-stroke-color:var(--blue);
+}
+/* Fallback for engines without text stroke support */
+@supports not (-webkit-text-stroke: 2px red){
+  .value__num{color:var(--blue);opacity:.32}
+  .value:hover .value__num{opacity:.6}
 }
 .value i.value__icon{
   width:56px;height:56px;border-radius:14px;
@@ -891,8 +1073,13 @@ p:last-child{margin-bottom:0}
 @media (max-width:1024px){.process__grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.process__grid{grid-template-columns:1fr}}
 
+.process__grid::before{
+  content:"";position:absolute;top:58px;left:11%;right:11%;height:2px;z-index:0;
+  background:linear-gradient(90deg,transparent 0%, rgba(255,255,255,.2) 12%, rgba(255,255,255,.2) 88%, transparent 100%);
+}
+@media (max-width:1024px){.process__grid::before{display:none}}
 .step{
-  position:relative;
+  position:relative;z-index:1;
   padding:32px 26px;
   border-radius:var(--radius);
   background:#08324A;
@@ -906,7 +1093,10 @@ p:last-child{margin-bottom:0}
   display:inline-flex;align-items:center;justify-content:center;
   font-family:'Barlow Condensed',sans-serif;font-size:1.5rem;font-weight:700;
   margin-bottom:20px;
+  box-shadow:0 0 0 7px rgba(245,227,26,.16);
+  transition:box-shadow .4s var(--ease), transform .4s var(--ease);
 }
+.step:hover .step__n{box-shadow:0 0 0 12px rgba(245,227,26,.22);transform:scale(1.05)}
 .step h3{font-size:1.24rem;color:#fff;margin-bottom:10px}
 .step p{font-size:.95rem;color:rgba(255,255,255,.72);margin:0}
 
@@ -965,6 +1155,10 @@ p:last-child{margin-bottom:0}
    ============================================================ */
 .marquee{
   position:relative;overflow:hidden;
+  padding:34px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg,#FCFDFE,var(--surface));
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
 }
@@ -990,7 +1184,7 @@ p:last-child{margin-bottom:0}
    ============================================================ */
 .cta-band{
   position:relative;overflow:hidden;
-  background:linear-gradient(112deg,var(--blue) 0%, var(--blue-700) 58%, var(--navy) 100%);
+  background:linear-gradient(112deg,var(--blue-700) 0%, #075E85 46%, var(--navy) 100%);
   padding:clamp(56px,6vw,86px) 0;
 }
 .cta-band::before{
@@ -1188,7 +1382,7 @@ p:last-child{margin-bottom:0}
   background:#F2F5F7;
   display:flex;align-items:center;justify-content:center;
   font-size:.52rem;font-weight:700;letter-spacing:.04em;
-  line-height:1.25;text-align:center;color:#6B7B85;
+  line-height:1.25;text-align:center;color:#5A6A74;
   padding:6px;pointer-events:none;
 }
 @media (max-width:860px){.recaptcha-slot{right:16px;bottom:96px}}
@@ -1211,6 +1405,11 @@ p:last-child{margin-bottom:0}
 @media (max-width:1024px){
   [data-reveal="left"],[data-reveal="right"]{transform:translateY(34px)}
 }
+/* Same again for engines without overflow clip, which would otherwise
+   show a horizontal scrollbar while the sideways reveal is running */
+@supports not (overflow-x: clip){
+  [data-reveal="left"],[data-reveal="right"]{transform:translateY(34px)}
+}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
@@ -1220,6 +1419,7 @@ p:last-child{margin-bottom:0}
     scroll-behavior:auto !important;
   }
   [data-reveal]{opacity:1;transform:none}
+  .section-head h2,.section-head.is-in h2{clip-path:none}
 }
 </style>
 
@@ -1293,6 +1493,7 @@ p:last-child{margin-bottom:0}
       </button>
     </div>
   </div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 </header>
 
 <!-- Mobile drawer -->
@@ -1453,13 +1654,6 @@ p:last-child{margin-bottom:0}
       </a>
 
       <a class="s-card" href="#contact" data-reveal>
-        <span class="s-card__icon"><i class="fa-solid fa-seedling"></i></span>
-        <h3>Green Roof Systems</h3>
-        <p>Roof gardens carry deep soil, mature planting and irrigation. We protect the structure and the living spaces underneath with a root resistant build up.</p>
-        <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
-      </a>
-
-      <a class="s-card" href="#contact" data-reveal>
         <span class="s-card__icon"><i class="fa-solid fa-layer-group"></i></span>
         <h3>Below Ground Tanking</h3>
         <p>Tanking has to be right the first time because there is no second chance once the backfill goes in. It is an integral part of the foundation, and we detail every construction joint with the matching water stop.</p>
@@ -1469,7 +1663,7 @@ p:last-child{margin-bottom:0}
       <a class="s-card" href="#contact" data-reveal>
         <span class="s-card__icon"><i class="fa-solid fa-fire-flame-curved"></i></span>
         <h3>Torch On Membranes</h3>
-        <p>Modified bitumen sheets with generous overlaps, ideal for roofs, decks, basements and planter boxes where durability is the priority.</p>
+        <p>Modified bitumen sheets with generous overlaps, ideal for roofs, decks, basements, roof gardens and planter boxes where durability is the priority.</p>
         <span class="s-card__more">Enquire about this <i class="fa-solid fa-arrow-right"></i></span>
       </a>
 
@@ -1500,49 +1694,93 @@ p:last-child{margin-bottom:0}
 <!-- ============================================================
      SEO CONTENT: Auckland waterproofing and water stop
      ============================================================ -->
-<section class="section section--tight seo-block" id="auckland-waterproofing">
+<section class="section seo-block" id="auckland-waterproofing">
+  <span class="seo-block__diamond seo-block__diamond--a" aria-hidden="true"></span>
+  <span class="seo-block__diamond seo-block__diamond--b" aria-hidden="true"></span>
+
   <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <p class="eyebrow eyebrow--center">Auckland Waterproofing and Water Stop</p>
+      <h2>Two Systems, One Watertight Result</h2>
+      <div class="rule rule--center"></div>
+      <p class="lead">
+        The membrane keeps water off the structure. The water stop keeps it out of the joints.
+        We install both, and we detail them together.
+      </p>
+    </div>
+
     <div class="seo-block__grid">
-      <div data-reveal="left">
-        <p class="eyebrow">Auckland Waterproofing and Water Stop</p>
-        <h2>Auckland Waterproofing Specialists for Membranes, Tanking and Water Stop</h2>
-        <div class="rule"></div>
-        <p>
-          Auckland Integrity Waterproofing has been doing waterproofing in Auckland since
-          2012, on new builds, renovations and remedial work. We install certified membrane
-          systems to flat roofs, decks, balconies, planter boxes and basements, and we carry
-          approved applicator status with the major New Zealand suppliers so the manufacturer
-          warranty behind your Auckland waterproofing stands up.
+      <div class="seo-block__body" data-reveal="left">
+        <p class="seo-block__intro">
+          Auckland Integrity Waterproofing has been doing waterproofing in Auckland since 2012,
+          on new builds, renovations and remedial work.
         </p>
         <p>
-          Water stop is the part most people never see. A waterstop is the seal cast inside
-          the concrete at a construction joint, an expansion joint or a slab to wall junction,
-          and it is what stops water tracking through the joint once the building is finished.
-          We install both PVC and hydrophilic water stop alongside our tanking packages, and
-          we detail the two together so the membrane and the joint seal work as one system
-          rather than two separate trades.
+          We install certified membrane systems to flat roofs, decks, balconies, planter boxes
+          and basements, and we carry approved applicator status with the major New Zealand
+          suppliers, so the manufacturer warranty behind your Auckland waterproofing stands up.
         </p>
+
+        <figure class="seo-note">
+          <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+          <blockquote>
+            A water stop is the seal cast inside the concrete at a construction joint, an
+            expansion joint or a slab to wall junction. It is what stops water tracking through
+            the joint once the building is finished.
+          </blockquote>
+          <figcaption>Why water stop matters</figcaption>
+        </figure>
+
         <p>
-          We cover the wider Auckland region, from the North Shore and Takapuna through the
-          central suburbs, Remuera and the eastern bays, out to West Auckland and south to
-          Manukau. If you are weighing up which waterproofing system an Auckland project needs,
-          send us the plans and we will tell you what we would specify and why.
+          We install both PVC and hydrophilic water stop alongside our tanking packages, and we
+          detail the two together so the membrane and the joint seal work as one system rather
+          than two separate trades handing off to each other.
         </p>
+
+        <h3 class="seo-block__sub">Where We Work</h3>
+        <p>
+          We cover the wider Auckland region. If you are weighing up which waterproofing system
+          an Auckland project needs, send us the plans and we will tell you what we would
+          specify and why.
+        </p>
+        <ul class="chips">
+          <li>North Shore</li><li>Takapuna</li><li>Central Auckland</li><li>Remuera</li>
+          <li>Eastern Bays</li><li>West Auckland</li><li>Manukau</li><li>Franklin</li>
+        </ul>
       </div>
 
-      <aside class="seo-block__aside" data-reveal="right">
-        <h3>Waterproofing We Install Across Auckland</h3>
-        <ul class="seo-list">
-          <li><i class="fa-solid fa-check"></i><a href="#services">Flat roof and deck membranes</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">Below ground tanking</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">PVC and hydrophilic water stop</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">Torch on membrane systems</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">TPO single ply roofing</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">Liquid applied membranes</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#services">Green roof and planter waterproofing</a></li>
-          <li><i class="fa-solid fa-check"></i><a href="#work">Remedial and leak repair work</a></li>
-        </ul>
-        <a class="btn btn--primary btn--block" href="#contact">Get an Auckland Waterproofing Quote</a>
+      <aside class="seo-card" data-reveal="right">
+        <div class="seo-card__media">
+          <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
+               alt="Water stop and membrane detailing on an Auckland waterproofing project" loading="lazy">
+          <span class="seo-card__badge"><i class="fa-solid fa-shield-halved"></i> Approved applicator</span>
+        </div>
+
+        <div class="seo-card__body">
+          <h3>Waterproofing We Install Across Auckland</h3>
+          <ul class="seo-list">
+            <li><i class="fa-solid fa-check"></i><a href="#services">Flat roof and deck membranes</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">Below ground tanking</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">PVC and hydrophilic water stop</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">Torch on membrane systems</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">TPO single ply roofing</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">Liquid applied membranes</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#services">Green roof and planter waterproofing</a></li>
+            <li><i class="fa-solid fa-check"></i><a href="#work">Remedial and leak repair work</a></li>
+          </ul>
+
+          <a class="btn btn--primary btn--block" href="#contact">
+            Get an Auckland Waterproofing Quote <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a class="seo-card__call" href="tel:+6421928379">
+            <span class="seo-card__call-icon"><i class="fa-solid fa-phone"></i></span>
+            <span>
+              <strong>Talk it through first</strong>
+              021 WATER 9 / 021 928 379
+            </span>
+          </a>
+        </div>
       </aside>
     </div>
   </div>
@@ -1646,6 +1884,7 @@ p:last-child{margin-bottom:0}
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2017/02/Auckland-Waterproofing-Membrane-Tanking-134-460x295.jpg"
              alt="Residential Auckland waterproofing membrane roof project" loading="lazy">
+        <span class="work-card__go" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
         <div class="work-card__body">
           <span class="work-card__tag">Residential</span>
           <h3>Life Church Auckland</h3>
@@ -1656,6 +1895,7 @@ p:last-child{margin-bottom:0}
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-122-460x295.jpg"
              alt="Commercial below ground tanking and water stop project in Auckland" loading="lazy">
+        <span class="work-card__go" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
         <div class="work-card__body">
           <span class="work-card__tag">Commercial</span>
           <h3>Nutritech International</h3>
@@ -1666,6 +1906,7 @@ p:last-child{margin-bottom:0}
       <a class="work-card" href="#work" data-reveal="zoom">
         <img src="https://aiw.co.nz/wp-content/uploads/2019/04/Auckland-Waterproofing-Membrane-Tanking-107-460x295.jpg"
              alt="Deck and balcony Auckland waterproofing in Takapuna" loading="lazy">
+        <span class="work-card__go" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
         <div class="work-card__body">
           <span class="work-card__tag">New Build</span>
           <h3>Park Ave, Takapuna</h3>
@@ -2323,10 +2564,17 @@ p:last-child{margin-bottom:0}
   var parallaxLayers = document.querySelectorAll('[data-parallax]');
   var toTop = document.getElementById('toTop');
   var callNow = document.getElementById('callNow');
+  var progress = document.getElementById('scrollProgress');
   var ticking = false;
 
   function onScroll() {
     var y = window.pageYOffset;
+
+    /* Reading progress along the bottom of the header */
+    if (progress) {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (max > 0 ? Math.min(y / max, 1) * 100 : 0) + '%';
+    }
 
     /* Header shrink */
     if (y > 40) { header.classList.add('is-stuck'); }
@@ -2364,6 +2612,23 @@ p:last-child{margin-bottom:0}
 
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
+
+  /* ---------------------------------------------------------
+     Cursor following glow on the service cards
+     --------------------------------------------------------- */
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.s-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+      card.addEventListener('pointerleave', function () {
+        card.style.setProperty('--mx', '50%');
+        card.style.setProperty('--my', '50%');
+      });
+    });
+  }
 
   /* ---------------------------------------------------------
      Scroll to top
