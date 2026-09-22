@@ -34,6 +34,7 @@
   --blue:        #1BA9E2;
   --blue-600:    #1191C6;
   --blue-700:    #0B78A6;
+  --blue-800:    #075E85;   /* for text on pale blue fills */
   --blue-050:    #EAF7FD;
   --blue-100:    #D2EEFA;
   --yellow:      #F5E31A;
@@ -143,16 +144,12 @@ p:last-child{margin-bottom:0}
 
 /* ---------- Shared type blocks ---------- */
 .eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
+  display:inline-flex;align-items:center;
   font-family:'Manrope',sans-serif;
   font-size:.75rem;font-weight:800;
   letter-spacing:.22em;text-transform:uppercase;
   color:var(--blue-700);
   margin:0 0 18px;
-}
-.eyebrow::before{
-  content:"";width:26px;height:3px;border-radius:2px;
-  background:var(--yellow);flex:none;
 }
 .eyebrow--light{color:var(--yellow);text-shadow:0 1px 10px rgba(3,20,31,.6)}
 .eyebrow--center{justify-content:center}
@@ -284,8 +281,6 @@ p:last-child{margin-bottom:0}
    ============================================================ */
 .section-cta{
   margin-top:clamp(40px,4vw,62px);
-  padding-top:clamp(28px,3vw,40px);
-  border-top:1px solid var(--line);
   display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
   gap:18px 28px;text-align:center;
 }
@@ -296,9 +291,7 @@ p:last-child{margin-bottom:0}
   font-weight:700;letter-spacing:.02em;text-transform:uppercase;
   color:var(--navy);
 }
-.section--navy .section-cta,.stats .section-cta{border-top-color:rgba(255,255,255,.18)}
 .section--navy .section-cta__text,.stats .section-cta__text{color:#fff}
-.tstm .section-cta{border-top-color:rgba(6,42,62,.14)}
 
 .btn--block{width:100%}
 .btn--lg{padding:22px 40px;font-size:.92rem}
@@ -307,33 +300,67 @@ p:last-child{margin-bottom:0}
    HEADER  (global element in WordPress)
    ============================================================ */
 .topbar{
-  background:var(--navy);
-  color:rgba(255,255,255,.72);
+  position:relative;
+  background:linear-gradient(100deg,var(--navy) 0%, #0A3B55 52%, #0C4A68 100%);
+  color:rgba(255,255,255,.85);
   font-size:.82rem;
   letter-spacing:.03em;
+  overflow:hidden;
+}
+/* Faint diamond weave picking up the shape in the logo */
+.topbar::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 9px);
+}
+/* Brand hairline along the bottom edge */
+.topbar::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,var(--yellow) 0%, var(--blue) 42%, rgba(27,169,226,0) 100%);
 }
 .topbar__inner{
+  position:relative;z-index:1;
   display:flex;align-items:center;justify-content:space-between;
-  gap:20px;min-height:44px;
+  gap:20px;min-height:48px;
 }
-.topbar__list{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.topbar__list a{display:inline-flex;align-items:center;gap:9px;transition:color .25s}
-.topbar__list a:hover{color:var(--yellow)}
-.topbar__list i{color:var(--blue);font-size:.85em}
-.topbar__badge{
+.topbar__list{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.topbar__list a{
   display:inline-flex;align-items:center;gap:9px;
+  padding:6px 12px;border-radius:7px;
+  transition:color .25s, background-color .25s;
+}
+.topbar__list a:hover{color:var(--yellow);background:rgba(255,255,255,.08)}
+.topbar__list i{color:var(--blue);font-size:.85em;transition:color .25s}
+.topbar__list a:hover i{color:var(--yellow)}
+/* The phone number leads, so it carries the accent */
+.topbar__list .is-phone{color:var(--yellow);font-weight:700;letter-spacing:.05em}
+.topbar__list .is-phone i{color:var(--yellow)}
+.topbar__badge{
+  display:inline-flex;align-items:center;gap:10px;
   font-weight:700;color:#fff;
 }
 .topbar__badge i{color:var(--yellow)}
+.topbar__badge::after{
+  content:"";width:7px;height:7px;border-radius:2px;
+  background:var(--blue);transform:rotate(45deg);margin-left:6px;
+}
 @media (max-width:1024px){.topbar{display:none}}
 
 .site-header{
   position:sticky;top:0;z-index:900;
   background:#fff;
   border-bottom:1px solid var(--line);
-  transition:box-shadow .35s var(--ease), padding .35s var(--ease);
+  transition:box-shadow .35s var(--ease), background-color .35s var(--ease);
 }
-.site-header.is-stuck{box-shadow:0 12px 30px -18px rgba(6,42,62,.45)}
+/* Frosted once it lifts off the top of the page */
+@supports (backdrop-filter: blur(4px)){
+  .site-header.is-stuck{
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(14px) saturate(1.3);
+  }
+}
+.site-header.is-stuck{box-shadow:0 14px 34px -20px rgba(6,42,62,.5)}
 .scroll-progress{
   position:absolute;left:0;bottom:-1px;height:3px;width:0;
   background:linear-gradient(90deg,var(--blue) 0%, var(--yellow) 100%);
@@ -363,45 +390,108 @@ p:last-child{margin-bottom:0}
   position:relative;
   display:inline-flex;align-items:center;gap:7px;
   padding:12px 16px;
+  border-radius:10px;
   font-size:.82rem;font-weight:800;
   letter-spacing:.11em;text-transform:uppercase;
   color:var(--navy);
-  transition:color .25s;
+  transition:color .25s, background-color .25s;
 }
+.nav__link:hover,.has-drop:hover > .nav__link{background:var(--blue-050)}
+.nav__link.is-active{background:var(--blue-050)}
 .nav__link::after{
   content:"";position:absolute;left:16px;right:16px;bottom:4px;
   height:3px;border-radius:2px;background:var(--yellow);
   transform:scaleX(0);transform-origin:left;
   transition:transform .35s var(--ease);
 }
-.nav__link:hover{color:var(--blue-700)}
+.nav__link:hover{color:var(--blue-800)}
 .nav__link:hover::after,.nav__link.is-active::after{transform:scaleX(1)}
-.nav__link.is-active{color:var(--blue-700)}
+.nav__link.is-active{color:var(--blue-800)}
 
 .has-drop{position:relative}
 .has-drop > .nav__link i{font-size:.6rem;transition:transform .3s}
 .has-drop:hover > .nav__link i{transform:rotate(180deg)}
 .drop{
-  position:absolute;top:100%;left:8px;
-  min-width:250px;
+  position:absolute;top:calc(100% + 8px);left:8px;
+  min-width:286px;
   background:#fff;
   border-radius:var(--radius-sm);
   border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  padding:10px;
+  border-top:3px solid var(--yellow);
+  box-shadow:var(--shadow-lg);
+  padding:12px;
   opacity:0;visibility:hidden;
-  transform:translateY(12px);
+  transform:translateY(14px);
   transition:opacity .3s var(--ease), transform .3s var(--ease), visibility .3s;
+}
+/* Notch pointing back up at its parent link */
+.drop::before{
+  content:"";position:absolute;top:-7px;left:26px;
+  width:12px;height:12px;background:var(--yellow);
+  transform:rotate(45deg);border-radius:2px;
+}
+/* Keeps the pointer inside the hover area while crossing the gap */
+.has-drop::after{
+  content:"";position:absolute;left:0;right:0;top:100%;height:12px;
 }
 .has-drop:hover .drop{opacity:1;visibility:visible;transform:translateY(0)}
 .drop a{
-  display:block;padding:11px 14px;border-radius:8px;
+  display:flex;align-items:center;gap:12px;
+  padding:11px 13px;border-radius:8px;
   font-size:.92rem;font-weight:600;color:var(--ink-700);
-  transition:background .25s,color .25s,padding-left .25s;
+  transition:background .25s,color .25s,transform .25s var(--ease);
 }
-.drop a:hover{background:var(--blue-050);color:var(--navy);padding-left:20px}
+.drop a i{
+  width:30px;height:30px;border-radius:8px;flex:none;
+  background:var(--blue-050);color:var(--blue-700);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.74rem;
+  transition:background-color .25s, color .25s;
+}
+.drop a:hover{background:var(--blue-050);color:var(--navy);transform:translateX(5px)}
+.drop a:hover i{background:var(--yellow);color:var(--navy)}
 
-.header__actions{display:flex;align-items:center;gap:14px;flex:none}
+.brand::after{
+  content:"";
+  width:1px;height:46px;margin-left:26px;
+  background:linear-gradient(180deg,transparent,var(--line) 22%, var(--line) 78%, transparent);
+}
+@media (max-width:1180px){.brand::after{display:none}}
+
+.header__actions{display:flex;align-items:center;gap:16px;flex:none}
+
+/* Phone block: the second strongest action in the bar */
+.header-call{
+  display:flex;align-items:center;gap:12px;
+  padding-right:16px;
+  border-right:1px solid var(--line);
+}
+.header-call__icon{
+  width:44px;height:44px;border-radius:50%;flex:none;
+  background:var(--navy);color:var(--yellow);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1rem;
+  transition:background-color .3s, transform .3s var(--ease);
+}
+.header-call:hover .header-call__icon{background:var(--blue-700);transform:rotate(-8deg) scale(1.06)}
+.header-call__text{display:flex;flex-direction:column;line-height:1.15}
+.header-call__text small{
+  font-size:.64rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-500);margin-bottom:3px;
+}
+.header-call__text strong{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1.2rem;font-weight:700;letter-spacing:.03em;
+  color:var(--navy);
+  transition:color .3s;
+}
+.header-call:hover .header-call__text strong{color:var(--blue-700)}
+/* Folded away before it can crowd the nav */
+@media (max-width:1400px){.header-call{display:none}}
+
+/* ============================================================
+   DROPDOWN: icons, a pointer notch and a brand top edge
+   ============================================================ */
 
 /* Circular phone icon, dark background, sits to the LEFT of the hamburger */
 .phone-circle{
@@ -1279,19 +1369,13 @@ p:last-child{margin-bottom:0}
 .partners-band h2{font-size:clamp(1.45rem,2vw,1.95rem);margin-bottom:14px}
 .partners-band .rule{width:70px;height:3px;margin-bottom:18px}
 .partners-band .lead{font-size:1rem}
-.partners-band .section-cta{
-  margin-top:clamp(26px,2.6vw,34px);
-  padding-top:clamp(22px,2.2vw,28px);
-}
+.partners-band .section-cta{margin-top:clamp(26px,2.6vw,34px)}
 .partners-band .section-cta__text{font-size:clamp(1.1rem,1.4vw,1.3rem)}
 
 
 .marquee{
   position:relative;overflow:hidden;
-  padding:34px 0;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  background:linear-gradient(180deg,#FCFDFE,var(--surface));
+  padding:26px 0;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
 }
@@ -1654,9 +1738,10 @@ p:last-child{margin-bottom:0}
       Licensed Building Practitioners and Site Safe accredited
     </div>
     <ul class="topbar__list">
-      <li><a href="tel:+6421928379"><i class="fa-solid fa-phone"></i> 021 WATER 9 / 021 928 379</a></li>
+      <li><a class="is-phone" href="tel:+6421928379"><i class="fa-solid fa-phone-volume"></i> 021 WATER 9 / 021 928 379</a></li>
       <li><a href="mailto:admin@aiw.co.nz"><i class="fa-solid fa-envelope"></i> admin@aiw.co.nz</a></li>
       <li><a href="#contact"><i class="fa-solid fa-location-dot"></i> Remuera, Auckland</a></li>
+      <li><a href="#faq"><i class="fa-regular fa-clock"></i> Mon to Fri, 9 to 5</a></li>
     </ul>
   </div>
 </div>
@@ -1673,22 +1758,23 @@ p:last-child{margin-bottom:0}
       <div class="has-drop">
         <a class="nav__link" href="#services">Services <i class="fa-solid fa-chevron-down"></i></a>
         <div class="drop">
-          <a href="#services">Flat Roof Membranes</a>
-          <a href="#services">Green Roof Systems</a>
-          <a href="#services">Below Ground Tanking</a>
-          <a href="#services">Torch On Membranes</a>
-          <a href="#services">TPO Single Ply</a>
-          <a href="#services">Liquid Membranes</a>
-          <a href="#services">Water Stop Systems</a>
+          <a href="#services"><i class="fa-solid fa-house-chimney"></i> Flat Roof Membranes</a>
+          <a href="#services"><i class="fa-solid fa-seedling"></i> Green Roof Systems</a>
+          <a href="#services"><i class="fa-solid fa-layer-group"></i> Below Ground Tanking</a>
+          <a href="#services"><i class="fa-solid fa-fire-flame-curved"></i> Torch On Membranes</a>
+          <a href="#services"><i class="fa-solid fa-recycle"></i> TPO Single Ply</a>
+          <a href="#services"><i class="fa-solid fa-droplet"></i> Liquid Membranes</a>
+          <a href="#services"><i class="fa-solid fa-grip-lines"></i> Water Stop Systems</a>
         </div>
       </div>
       <div class="has-drop">
         <a class="nav__link" href="#work">Work <i class="fa-solid fa-chevron-down"></i></a>
         <div class="drop">
-          <a href="#work">Life Church Auckland</a>
-          <a href="#work">Nutritech International</a>
-          <a href="#work">Park Ave, Takapuna</a>
-          <a href="#work">Lone Kauri Road, Karekare</a>
+          <a href="#work"><i class="fa-solid fa-location-dot"></i> Life Church Auckland</a>
+          <a href="#work"><i class="fa-solid fa-location-dot"></i> Nutritech International</a>
+          <a href="#work"><i class="fa-solid fa-location-dot"></i> Park Ave, Takapuna</a>
+          <a href="#work"><i class="fa-solid fa-location-dot"></i> Lone Kauri Road, Karekare</a>
+          <a href="#work"><i class="fa-solid fa-images"></i> View the full portfolio</a>
         </div>
       </div>
       <a class="nav__link" href="#faq">FAQ</a>
@@ -1696,6 +1782,13 @@ p:last-child{margin-bottom:0}
     </nav>
 
     <div class="header__actions">
+      <a class="header-call" href="tel:+6421928379">
+        <span class="header-call__icon"><i class="fa-solid fa-phone-volume"></i></span>
+        <span class="header-call__text">
+          <small>Call us today</small>
+          <strong>021 WATER 9</strong>
+        </span>
+      </a>
       <a class="btn btn--primary btn--glow" href="#quote">Get a Free Quote <i class="fa-solid fa-arrow-right"></i></a>
       <!-- Circular phone icon with dark background, to the left of the hamburger -->
       <a class="phone-circle" href="tel:+6421928379" aria-label="Call Auckland Integrity Waterproofing">
