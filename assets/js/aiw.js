@@ -261,6 +261,75 @@
   }
 
   /* ---------------------------------------------------------
+     Gallery lightbox
+     Built only when a gallery is on the page. Keyboard driven,
+     returns focus to the thumbnail it opened from.
+     --------------------------------------------------------- */
+  var galleryItems = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]'));
+
+  if (galleryItems.length) {
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Project image viewer');
+    lb.innerHTML =
+      '<img class="lightbox__img" alt="">' +
+      '<p class="lightbox__cap"></p>' +
+      '<button type="button" class="lightbox__btn lightbox__close" aria-label="Close image viewer"><i class="fa-solid fa-xmark"></i></button>' +
+      '<button type="button" class="lightbox__btn lightbox__prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>' +
+      '<button type="button" class="lightbox__btn lightbox__next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>';
+    document.body.appendChild(lb);
+
+    var lbImg = lb.querySelector('.lightbox__img');
+    var lbCap = lb.querySelector('.lightbox__cap');
+    var lbClose = lb.querySelector('.lightbox__close');
+    var current = 0;
+    var opener = null;
+
+    function show(i) {
+      current = (i + galleryItems.length) % galleryItems.length;
+      var item = galleryItems[current];
+      var full = item.getAttribute('data-lightbox');
+      var img = item.querySelector('img');
+      lbImg.src = full;
+      lbImg.alt = img ? img.alt : '';
+      lbCap.textContent = (img ? img.alt : '') + '  (' + (current + 1) + ' of ' + galleryItems.length + ')';
+    }
+    function open(i, from) {
+      opener = from || null;
+      show(i);
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      /* The panel is still visibility hidden on this frame, and a hidden
+         element cannot take focus, so move into the dialog on the next one. */
+      requestAnimationFrame(function () { lbClose.focus(); });
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    galleryItems.forEach(function (item, i) {
+      item.addEventListener('click', function (e) { e.preventDefault(); open(i, item); });
+      item.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i, item); }
+      });
+    });
+    lbClose.addEventListener('click', close);
+    lb.querySelector('.lightbox__prev').addEventListener('click', function () { show(current - 1); });
+    lb.querySelector('.lightbox__next').addEventListener('click', function () { show(current + 1); });
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target === lbImg) { close(); } });
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('is-open')) { return; }
+      if (e.key === 'Escape') { close(); }
+      if (e.key === 'ArrowLeft') { show(current - 1); }
+      if (e.key === 'ArrowRight') { show(current + 1); }
+    });
+  }
+
+  /* ---------------------------------------------------------
      Demo form handling, replace with Contact Form 7 in WordPress
      --------------------------------------------------------- */
   document.querySelectorAll('form').forEach(function (form) {

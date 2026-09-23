@@ -521,9 +521,12 @@ p:last-child{margin-bottom:0}
   background:rgba(6,42,62,.55);
   backdrop-filter:blur(3px);
   opacity:0;visibility:hidden;
-  transition:opacity .35s var(--ease), visibility .35s;
+  transition:opacity .35s var(--ease), visibility 0s linear .35s;
 }
-.drawer.is-open{opacity:1;visibility:visible}
+.drawer.is-open{
+  opacity:1;visibility:visible;
+  transition:opacity .35s var(--ease), visibility 0s linear 0s;
+}
 .drawer__panel{
   position:absolute;top:0;right:0;bottom:0;
   width:min(400px,88vw);
@@ -1899,3 +1902,199 @@ p:last-child{margin-bottom:0}
   display:block;margin-top:8px;
   font-size:.8rem;color:var(--ink-500);
 }
+
+/* ============================================================
+   PROJECT DETAIL
+   ============================================================ */
+.proj-detail__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
+  gap:clamp(32px,4vw,60px);
+  align-items:start;
+}
+.proj-detail__grid > *{min-width:0}
+@media (max-width:1024px){.proj-detail__grid{grid-template-columns:1fr}}
+
+/* Specification card */
+.spec-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  border-top:5px solid var(--yellow);
+  box-shadow:var(--shadow);
+  padding:30px 28px;
+  position:sticky;top:calc(var(--header-h) + 24px);
+}
+@media (max-width:1024px){.spec-card{position:static}}
+.spec-card h2{font-size:1.4rem;margin-bottom:6px}
+.spec-card__sub{font-size:.9rem;color:var(--ink-500);margin-bottom:24px}
+.spec-list{display:grid;gap:0}
+/* Direct children only. Matching every div would also turn the inner
+   label and value wrapper into a flex row and lay them side by side. */
+.spec-list > div{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+.spec-list > div:last-child{border-bottom:0;padding-bottom:0}
+.spec-list i{
+  width:36px;height:36px;border-radius:10px;flex:none;
+  background:var(--blue-050);color:var(--blue-800);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;
+}
+.spec-list dt{
+  font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-500);margin-bottom:3px;
+}
+.spec-list dd{
+  margin:0;font-size:1rem;font-weight:700;color:var(--navy);
+  font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;
+  font-size:1.16rem;
+}
+
+/* Challenge and solution pair */
+.cs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+@media (max-width:860px){.cs-grid{grid-template-columns:1fr}}
+.cs-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:34px 30px;
+  position:relative;overflow:hidden;
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s;
+}
+.cs-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--blue-100)}
+.cs-card__tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue-800);margin-bottom:16px;
+}
+.cs-card__tag i{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--yellow);color:var(--navy);
+  display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;
+}
+.cs-card h3{font-size:1.35rem;margin-bottom:12px}
+.cs-card p{font-size:1rem;margin-bottom:0}
+
+/* Systems used */
+.sys-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+@media (max-width:860px){.sys-grid{grid-template-columns:1fr}}
+.sys-card{
+  background:#08324A;border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius);padding:32px 30px;
+  transition:transform .4s var(--ease), background-color .4s;
+}
+.sys-card:hover{transform:translateY(-8px);background:#0A3C58}
+.sys-card__badge{
+  display:inline-block;background:var(--yellow);color:var(--navy);
+  font-size:.66rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  padding:7px 13px;border-radius:6px;margin-bottom:18px;
+}
+.sys-card h3{font-size:1.3rem;color:#fff;margin-bottom:12px}
+.sys-card p{font-size:.97rem;color:rgba(255,255,255,.78);margin-bottom:18px}
+.sys-card ul{display:grid;gap:10px}
+.sys-card li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:.94rem;color:rgba(255,255,255,.88);
+}
+.sys-card li i{
+  width:22px;height:22px;border-radius:50%;flex:none;margin-top:3px;
+  background:var(--blue);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.58rem;
+}
+
+/* ============================================================
+   GALLERY with lightbox
+   ============================================================ */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:190px;
+  gap:18px;
+}
+@media (max-width:1024px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.gallery{grid-template-columns:1fr;grid-auto-rows:220px}}
+.gallery__item{
+  position:relative;display:block;
+  border-radius:var(--radius);overflow:hidden;
+  background:var(--surface);
+  cursor:zoom-in;
+  box-shadow:var(--shadow-sm);
+}
+.gallery__item--wide{grid-column:span 2;grid-row:span 2}
+@media (max-width:560px){.gallery__item--wide{grid-column:span 1;grid-row:span 1}}
+.gallery__item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.gallery__item:hover img{transform:scale(1.07)}
+.gallery__item::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(4,26,39,.55),rgba(4,26,39,0) 55%);
+  opacity:0;transition:opacity .4s;
+}
+.gallery__item:hover::after{opacity:1}
+.gallery__zoom{
+  position:absolute;right:16px;bottom:16px;z-index:2;
+  width:42px;height:42px;border-radius:50%;
+  background:var(--yellow);color:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:.82rem;
+  opacity:0;transform:scale(.8);
+  transition:opacity .35s var(--ease), transform .35s var(--ease);
+}
+.gallery__item:hover .gallery__zoom{opacity:1;transform:scale(1)}
+.gallery__item:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+.lightbox{
+  position:fixed;inset:0;z-index:1100;
+  background:rgba(4,26,39,.94);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,56px);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s var(--ease), visibility 0s linear .3s;
+}
+.lightbox.is-open{
+  opacity:1;visibility:visible;
+  transition:opacity .3s var(--ease), visibility 0s linear 0s;
+}
+.lightbox__img{
+  max-width:100%;max-height:100%;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  transform:scale(.96);
+  transition:transform .35s var(--ease);
+}
+.lightbox.is-open .lightbox__img{transform:scale(1)}
+.lightbox__cap{
+  position:absolute;left:0;right:0;bottom:22px;
+  text-align:center;color:rgba(255,255,255,.82);
+  font-size:.9rem;padding:0 60px;
+}
+.lightbox__btn{
+  position:absolute;
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;color:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  transition:background-color .3s, transform .3s var(--ease);
+}
+.lightbox__btn:hover{background:var(--yellow);transform:scale(1.07)}
+.lightbox__btn:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.lightbox__close{top:22px;right:22px}
+.lightbox__prev{left:22px;top:50%;margin-top:-26px}
+.lightbox__next{right:22px;top:50%;margin-top:-26px}
+@media (max-width:640px){
+  .lightbox__prev{left:12px}
+  .lightbox__next{right:12px}
+  .lightbox__btn{width:44px;height:44px}
+  .lightbox__cap{padding:0 20px;font-size:.82rem}
+}
+
+/* Arrow badge on a project card that links through to its own page */
+.proj__go{
+  position:absolute;top:16px;right:16px;z-index:3;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--yellow);color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(-10px) scale(.85);
+  transition:opacity .4s var(--ease), transform .4s var(--ease);
+}
+.proj{position:relative}
+.proj:hover .proj__go{opacity:1;transform:translateY(0) scale(1)}
+.proj .s-card__more{color:var(--blue-800)}
+.proj:hover .s-card__more{gap:16px}
