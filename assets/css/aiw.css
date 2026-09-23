@@ -1032,6 +1032,13 @@ p:last-child{margin-bottom:0}
 }
 .jump-nav a:hover i{color:var(--blue-800)}
 .jump-nav a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* Two buttons under a service detail row: read the full page, or enquire */
+.svc-row__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:520px){
+  .svc-row__actions{flex-direction:column;align-items:stretch}
+  .svc-row__actions .btn{justify-content:center}
+}
 @media (max-width:560px){
   .jump-nav{gap:8px}
   .jump-nav a{padding:10px 16px;font-size:.8rem}
@@ -1528,7 +1535,7 @@ p:last-child{margin-bottom:0}
   background:var(--navy);color:var(--yellow);
   display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem;
 }
-.info-item h4{
+.info-item h3{
   font-size:1.02rem;margin:0 0 4px;letter-spacing:.06em;
 }
 .info-item p,.info-item a{font-size:.97rem;margin:0;color:var(--ink-700);display:block}

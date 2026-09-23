@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Nothing here is private, but these add no value to an index
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+Sitemap: https://aiw.co.nz/sitemap.xml
