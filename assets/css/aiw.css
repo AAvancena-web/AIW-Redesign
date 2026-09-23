@@ -1012,6 +1012,31 @@ p:last-child{margin-bottom:0}
 }
 .chips li:hover{border-color:var(--blue);color:var(--blue-700);transform:translateY(-2px)}
 
+/* Jump navigation. Used on the FAQ page to move between topic blocks.
+   Padding sits on the anchor so the whole pill is the hit target. */
+.jump-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px}
+.jump-nav a{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 21px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:60px;
+  font-size:.87rem;font-weight:700;
+  color:var(--ink-700);
+  transition:border-color .3s, color .3s, transform .3s var(--ease), box-shadow .3s;
+}
+.jump-nav a i{color:var(--blue-700);transition:color .3s}
+.jump-nav a:hover{
+  border-color:var(--blue);color:var(--blue-800);
+  transform:translateY(-2px);box-shadow:var(--shadow-sm);
+}
+.jump-nav a:hover i{color:var(--blue-800)}
+.jump-nav a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+@media (max-width:560px){
+  .jump-nav{gap:8px}
+  .jump-nav a{padding:10px 16px;font-size:.8rem}
+}
+
 /* Feature card */
 .seo-card{
   background:#fff;
