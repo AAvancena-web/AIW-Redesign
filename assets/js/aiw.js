@@ -234,17 +234,23 @@
      inner pages the links are real URLs, and the active item is already set
      in the markup, so the spy must leave it alone. */
   var anchorLinks = document.querySelectorAll('.nav__link[href^="#"]');
+  /* The link the markup marks as current, for example Home on the home page.
+     It gives way while an in-page section is on screen and comes back after. */
+  var defaultActive = document.querySelector('.nav__link.is-active');
 
   if ('IntersectionObserver' in window && anchorLinks.length) {
     var navObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) { return; }
+        var matched = null;
         anchorLinks.forEach(function (link) {
-          link.classList.toggle(
-            'is-active',
-            link.getAttribute('href') === '#' + entry.target.id
-          );
+          var on = link.getAttribute('href') === '#' + entry.target.id;
+          link.classList.toggle('is-active', on);
+          if (on) { matched = link; }
         });
+        if (defaultActive && defaultActive !== matched) {
+          defaultActive.classList.toggle('is-active', !matched);
+        }
       });
     }, { threshold: 0.35 });
 
