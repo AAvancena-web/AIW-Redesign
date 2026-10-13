@@ -2153,6 +2153,16 @@ p:last-child{margin-bottom:0}
 }
 .gallery__item--wide{grid-column:span 2;grid-row:span 2}
 @media (max-width:560px){.gallery__item--wide{grid-column:span 1;grid-row:span 1}}
+
+/* Even gallery: every tile the same width and height. For sets where no
+   single photograph should be featured over the others. The aspect ratio
+   does the work, so the tiles stay square shouldered at every width. */
+.gallery--even{grid-template-columns:repeat(5,1fr);grid-auto-rows:auto}
+.gallery--even .gallery__item{aspect-ratio:4 / 3}
+.gallery--even .gallery__item--wide{grid-column:span 1;grid-row:span 1}
+@media (max-width:1240px){.gallery--even{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.gallery--even{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:460px){.gallery--even{grid-template-columns:1fr}}
 .gallery__item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .gallery__item:hover img{transform:scale(1.07)}
 .gallery__item::after{
