@@ -1235,12 +1235,12 @@ p:last-child{margin-bottom:0}
 .stats .lead{color:rgba(255,255,255,.76)}
 .stats__grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(3,1fr);
   gap:26px;
   margin-top:48px;
 }
-@media (max-width:900px){.stats__grid{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:480px){.stats__grid{grid-template-columns:1fr}}
+/* Three stats, so no two up step: it would leave one stranded on its own row */
+@media (max-width:720px){.stats__grid{grid-template-columns:1fr}}
 
 .stat{
   text-align:center;
